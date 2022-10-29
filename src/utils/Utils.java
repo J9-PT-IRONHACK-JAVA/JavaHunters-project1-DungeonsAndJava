@@ -12,4 +12,17 @@ public class Utils {
 
         return randomNum;
     }
+
+    public static void printLettersOneByOne() {
+        CharSequence input = null;
+        for (int i = 0; i < input.length(); i++){
+                System.out.println(input.charAt(i));
+            }
+            try{
+                Thread.sleep(500);//0.5s pause between characters
+            } catch(InterruptedException ex){
+                Thread.currentThread().interrupt();
+            }
+
+    }
 }
