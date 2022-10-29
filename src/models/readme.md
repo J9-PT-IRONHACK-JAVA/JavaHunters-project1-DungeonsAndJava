@@ -1,0 +1,1 @@
+This folder is in charge to organize all project models.
