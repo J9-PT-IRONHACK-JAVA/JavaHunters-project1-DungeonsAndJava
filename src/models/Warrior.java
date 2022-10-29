@@ -2,21 +2,19 @@ package models;
 
 import utils.Utils;
 
-import java.util.Random;
-
-public class Warrior extends Character{
+public class Warrior extends Character {
 
     int stamina, strength;
 
+    // * Random constructor
     public Warrior(String name) {
-
         super(name);
         setStamina();
         setStrength();
         warriorHp();
     }
 
-    //Custom costructor to implement!!!
+    // TODO: Custom constructor to implement when ready
     public Warrior(String name, int hp, int stamina, int strength) {
         super(name, hp);
         this.stamina = stamina;
@@ -41,28 +39,25 @@ public class Warrior extends Character{
         this.strength = Utils.getRandomNum(1, 10);
     }
 
-    public void warriorHp(){
+    public void warriorHp() {
 
         int warriorHp = Utils.getRandomNum(100, 200);
         setHp(warriorHp);
     }
 
+    @Override
+    public void attack() {
+        System.out.println("I'm a Warrior calling the attack() method.");
+    }
 
     @Override
     public String toString() {
         String string;
         string = super.toString();
-        return  string+
+        return string +
                 "Warrior{" +
                 "stamina=" + stamina +
                 ", strength=" + strength +
                 '}';
     }
-
-    @Override
-    public void attack() {
-        System.out.println("Juan");
-    }
-
-
 }

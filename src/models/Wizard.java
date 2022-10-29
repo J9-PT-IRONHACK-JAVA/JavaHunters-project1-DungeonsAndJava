@@ -2,19 +2,19 @@ package models;
 
 import utils.Utils;
 
-public class Wizard extends Character{
+public class Wizard extends Character {
 
     int mana, intelligence;
 
+    // * Random constructor
     public Wizard(String name) {
         super(name);
-
         wizardHp();
         setMana();
         setIntelligence();
     }
 
-    //Custom costructor to implement!!!
+    // TODO: Custom constructor to implement when ready
     public Wizard(String name, int hp, int mana, int intelligence) {
 
         super(name, hp);
@@ -39,27 +39,24 @@ public class Wizard extends Character{
         this.intelligence = Utils.getRandomNum(1, 50);
     }
 
-    public void wizardHp(){
-
+    public void wizardHp() {
         int wizardHp = Utils.getRandomNum(50, 100);
         setHp(wizardHp);
+    }
+
+    @Override
+    public void attack() {
+        System.out.println("I'm a Wizard calling the attack() method.");
     }
 
     @Override
     public String toString() {
         String string;
         string = super.toString();
-        return  string+
+        return string +
                 "Wizard{" +
                 "Mana=" + mana +
                 ", Intelligence=" + intelligence +
                 '}';
     }
-
-    @Override
-    public void attack() {
-        System.out.println("Wizard");
-    }
-
-
 }

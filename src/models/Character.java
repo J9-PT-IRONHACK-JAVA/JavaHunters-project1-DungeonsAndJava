@@ -2,17 +2,18 @@ package models;
 
 import java.util.UUID;
 
-public abstract class Character implements Attacker{
+public abstract class Character implements Attacker {
     private UUID id = UUID.randomUUID();
     private String name;
     private int hp;
     private boolean isAlive = true;
 
-    public Character( String name){
+    // * Random constructor
+    public Character(String name) {
         this.name = name;
     }
 
-    //Custom costructor to implement!!!
+    // TODO: Custom constructor to implement when ready
     public Character(String name, int hp) {
         this.name = name;
         this.hp = hp;
@@ -38,7 +39,7 @@ public abstract class Character implements Attacker{
         return hp;
     }
 
-    public void setHp(int hp){
+    public void setHp(int hp) {
         this.hp = hp;
     }
 
