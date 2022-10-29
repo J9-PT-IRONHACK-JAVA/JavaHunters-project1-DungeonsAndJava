@@ -1,2 +1,2 @@
-# HERE IS OUR SUPER PROJECT
-### Complete this readme in the future...
+
+![Java Dragons](./assets/jd-logo.jpg)
