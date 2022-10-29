@@ -8,10 +8,14 @@ public abstract class Character implements Attacker{
     private int hp;
     private boolean isAlive = true;
 
-    public Character( String name, int hp){
+    public Character( String name){
+        this.name = name;
+    }
+
+    //Custom costructor to implement!!!
+    public Character(String name, int hp) {
         this.name = name;
         this.hp = hp;
-
     }
 
     public UUID getId() {
@@ -34,7 +38,7 @@ public abstract class Character implements Attacker{
         return hp;
     }
 
-    public void setHp(int hp) {
+    public void setHp(int hp){
         this.hp = hp;
     }
 

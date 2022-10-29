@@ -1,48 +1,67 @@
 package models;
 
+import utils.Utils;
+
 import java.util.Random;
 
 public class Warrior extends Character{
 
-    int stamina;
-    int strength; //random between 10-50, between 1-10
+    int stamina, strength;
+
+    public Warrior(String name) {
+
+        super(name);
+        setStamina();
+        setStrength();
+        warriorHp();
+    }
+
+    //Custom costructor to implement!!!
+    public Warrior(String name, int hp, int stamina, int strength) {
+        super(name, hp);
+        this.stamina = stamina;
+        this.strength = strength;
+    }
 
     public int getStamina() {
         return stamina;
     }
 
-    public void setStamina(int stamina) {
+    public void setStamina() {
 
-        int minValue, maxValue, randomNum;
-        Random random = new Random();
-
-        minValue = 10;
-        maxValue = 50;
-
-        randomNum = random.nextInt(maxValue - minValue) + minValue;
-        System.out.println(randomNum);
-
-        this.stamina = stamina;
+        this.stamina = Utils.getRandomNum(10, 50);
     }
 
     public int getStrength() {
         return strength;
     }
 
-    public void setStrength(int strength) {
-        this.strength = strength;
+    public void setStrength() {
+
+        this.strength = Utils.getRandomNum(1, 10);
     }
 
+    public void warriorHp(){
 
-    public Warrior(String name, int hp) {
-        super(name, hp);
+        int warriorHp = Utils.getRandomNum(100, 200);
+        setHp(warriorHp);
     }
-
 
 
     @Override
-    public void attack() {
+    public String toString() {
+        String string;
+        string = super.toString();
+        return  string+
+                "Warrior{" +
+                "stamina=" + stamina +
+                ", strength=" + strength +
+                '}';
+    }
 
+    @Override
+    public void attack() {
+        System.out.println("Juan");
     }
 
 
