@@ -1,3 +1,7 @@
+import utils.ConsoleColors;
+import utils.Messages;
+import utils.Utils;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -10,6 +14,7 @@ public class Menu {
     static String computerName = "IA";
     static String computerTeamName = "House of the Dragons";
     static int difficulty;
+
 
     public static void startGame() throws FileNotFoundException {
         var sc = new Scanner(System.in);
@@ -27,17 +32,8 @@ public class Menu {
     }
 
     public static void setGameSettings(Scanner sc) throws FileNotFoundException {
-        // * user registration
-        System.out.println("What's your name?");
-        userName = sc.nextLine();
-
-        System.out.println("Your user name is: " + userName);
-
-        // * team registration
-        System.out.println("What's the name of your team?");
-        teamName = sc.nextLine();
-
-        System.out.println("Your team name is: " + teamName);
+        registerUserName(sc);
+        registerUserTeamName(sc);
 
         // * difficulty registration
         System.out.println("Select difficulty (Select range between 0-2)\n0: EASY\n1: MIDDLE\n2: HARD");
@@ -46,7 +42,7 @@ public class Menu {
         while (toExit) {
             String input = sc.nextLine();
 
-            switch(input) {
+            switch (input) {
                 case "0":
                     System.out.println("You select EASY Mode");
                     difficulty = 0;
@@ -67,12 +63,23 @@ public class Menu {
             }
         }
 
-        var readFile = readFromFile("src/repository/database/IAdB/difficulty-"  + difficulty + ".csv");
+        var readFile = readFromFile("src/repository/database/IAdB/difficulty-" + difficulty + ".csv");
 
         for (String file : readFile) {
             System.out.println(file);
         }
 
+    }
+
+    private static void registerUserName(Scanner sc) {
+        Utils.typewriterFromString(Messages.askUserNameMsg);
+        userName = sc.nextLine();
+    }
+
+    private static void registerUserTeamName(Scanner sc) {
+        Utils.typewriterFromString(Messages.askTeamNameMsg(userName, ConsoleColors.GREEN_BOLD));
+        teamName = sc.nextLine();
+        Utils.typewriterFromString(Messages.endUserRegistrationMsg(userName, teamName, ConsoleColors.BLUE));
     }
 
     public static void createPartyOfCharacters(Scanner sc) {
@@ -88,7 +95,7 @@ public class Menu {
 
         do {
             readFile.add(reader.nextLine());
-        }while(reader.hasNextLine());
+        } while (reader.hasNextLine());
 
         reader.close();
         return readFile;

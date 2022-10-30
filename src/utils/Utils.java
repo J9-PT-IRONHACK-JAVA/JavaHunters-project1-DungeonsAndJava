@@ -12,4 +12,17 @@ public class Utils {
 
         return randomNum;
     }
+
+    public static void typewriterFromString(String stringToApplyEffect) {
+        int typewriterDelay = 50;
+        for (int i = 0; i < stringToApplyEffect.length(); i++) {
+            System.out.print(stringToApplyEffect.charAt(i));
+            try {
+                Thread.sleep(typewriterDelay);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
 }
