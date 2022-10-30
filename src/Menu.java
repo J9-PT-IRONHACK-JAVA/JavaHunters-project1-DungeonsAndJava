@@ -11,7 +11,7 @@ public class Menu {
 
     static String userName;
     static String teamName;
-    static String computerName = "IA";
+    static String computerName = "AI";
     static String computerTeamName = "House of the Dragons";
     static int difficulty;
 
@@ -28,7 +28,7 @@ public class Menu {
 
 
     public static void welcomeUserName() {
-        System.out.println("Welcome to the game user!!");
+        System.out.println("Welcome to Dungeons And Java!");
     }
 
     public static void setGameSettings(Scanner sc) throws FileNotFoundException {
@@ -36,7 +36,8 @@ public class Menu {
         registerUserTeamName(sc);
 
         // * difficulty registration
-        System.out.println("Select difficulty (Select range between 0-2)\n0: EASY\n1: MIDDLE\n2: HARD");
+        System.out.println("Choose wisely your desired difficulty level from 0 to 2\n0: A Walk In The Park\n1: Middle" +
+                " Of The Road\n2: Nightmare!");
 
         boolean toExit = true;
         while (toExit) {
@@ -44,22 +45,22 @@ public class Menu {
 
             switch (input) {
                 case "0":
-                    System.out.println("You select EASY Mode");
+                    System.out.println("You selected: A Walk In The Park");
                     difficulty = 0;
                     toExit = false;
                     break;
                 case "1":
-                    System.out.println("You select MIDDLE Mode");
+                    System.out.println("You selected: Middle Of The Road");
                     difficulty = 1;
                     toExit = false;
                     break;
                 case "2":
-                    System.out.println("You select HARD Mode");
+                    System.out.println("You selected: Nightmare!");
                     difficulty = 2;
                     toExit = false;
                     break;
                 default:
-                    System.out.println("Select Correct choice");
+                    System.out.println("Selection unrecognised. Remember mortal, select from 0 to 2!");
             }
         }
 
@@ -83,7 +84,7 @@ public class Menu {
     }
 
     public static void createPartyOfCharacters(Scanner sc) {
-        System.out.println("Create team: Add characters to the team/party");
+        System.out.println("Create your team: Add your characters to the team/party");
         // Create 5 random characters
     }
 
