@@ -13,16 +13,15 @@ public class Utils {
         return randomNum;
     }
 
-    public static void printLettersOneByOne() {
-        CharSequence input = null;
-        for (int i = 0; i < input.length(); i++){
-                System.out.println(input.charAt(i));
+    public static void typewriterFromString(String stringToApplyEffect) {
+        int typewriterDelay = 50;
+        for (int i = 0; i < stringToApplyEffect.length(); i++) {
+            System.out.print(stringToApplyEffect.charAt(i));
+            try {
+                Thread.sleep(typewriterDelay);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
             }
-            try{
-                Thread.sleep(500);//0.5s pause between characters
-            } catch(InterruptedException ex){
-                Thread.currentThread().interrupt();
-            }
-
+        }
     }
 }

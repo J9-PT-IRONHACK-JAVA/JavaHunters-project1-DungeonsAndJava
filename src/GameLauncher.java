@@ -1,6 +1,3 @@
-import models.Warrior;
-import models.Wizard;
-
 import java.io.FileNotFoundException;
 
 public class GameLauncher {
