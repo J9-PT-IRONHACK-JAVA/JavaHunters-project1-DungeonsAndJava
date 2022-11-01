@@ -1,5 +1,7 @@
 package models;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public abstract class Character implements Attacker {
@@ -60,5 +62,9 @@ public abstract class Character implements Attacker {
                 ", isAlive=" + isAlive +
                 '}';
     }
+
+    public  String dataToString(){
+        return null;
+    };
 
 }

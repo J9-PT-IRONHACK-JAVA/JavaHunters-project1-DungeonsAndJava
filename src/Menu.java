@@ -5,10 +5,11 @@ import utils.ConsoleColors;
 import utils.Messages;
 import utils.Utils;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Menu {
 
@@ -22,10 +23,14 @@ public class Menu {
     public static void startGame() throws FileNotFoundException {
         var sc = new Scanner(System.in);
 
-        welcomeUserName();
-        setGameSettings(sc);
+        Warrior test = new Warrior("dani");
+        System.out.println(test.dataToString());
 
-        sc.close();
+        writeCSV(test.dataToString());
+        //welcomeUserName();
+        //setGameSettings(sc);
+
+        //sc.close();
     }
 
 
@@ -108,7 +113,7 @@ public class Menu {
             case "1":
                 Character character;
                  character = createNewCharacter(sc);
-                System.out.println(character.toString());
+                //System.out.println(character.toString());
                 break;
             case "2":
                 System.out.println("2");
@@ -145,11 +150,15 @@ public class Menu {
             newCharacter = new Wizard(name);
         }
         return newCharacter;
-
     }
 
-    public static void saveUserCharecterToDb(Character character){
-        
+    public static void writeCSV(String line) {
+        try{
+            FileWriter fw=new FileWriter("src/repository/database/userDb/user.csv");
+            fw.write(line);
+            fw.close();
+        }catch(Exception e){System.out.println(e);}
+        System.out.println("Success...");
     }
 
 

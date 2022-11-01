@@ -2,6 +2,9 @@ package models;
 
 import utils.Utils;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Warrior extends Character {
 
     int stamina, strength;
@@ -48,6 +51,27 @@ public class Warrior extends Character {
     @Override
     public void attack() {
         System.out.println("I'm a Warrior calling the attack() method.");
+    }
+
+    @Override
+    public String dataToString() {
+
+       String characterStats = "";
+
+        String parseID, parseHp, parseStamina, parseStrength;;
+
+        parseHp = String.valueOf(getHp());
+        parseID = String.valueOf(getId());
+        parseStamina = String.valueOf(this.stamina);
+        parseStrength = String.valueOf(this.strength);
+
+        characterStats += parseID + ", ";
+        characterStats += getName() + ", ";
+        characterStats += parseHp + ", ";
+        characterStats += parseStamina + ", ";
+        characterStats += parseStrength;
+
+        return characterStats;
     }
 
     @Override
