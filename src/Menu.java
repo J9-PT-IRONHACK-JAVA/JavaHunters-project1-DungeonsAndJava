@@ -1,3 +1,4 @@
+import services.DifficultyService;
 import utils.ConsoleColors;
 import utils.Messages;
 import utils.Utils;
@@ -14,6 +15,10 @@ public class Menu {
     static String computerName = "AI";
     static String computerTeamName = "House of the Dragons";
     static int difficulty;
+
+    static ArrayList<String> iaParty;
+    private static DifficultyService difficultyService = new DifficultyService();
+
 
 
     public static void startGame() throws FileNotFoundException {
@@ -34,42 +39,7 @@ public class Menu {
     public static void setGameSettings(Scanner sc) throws FileNotFoundException {
         registerUserName(sc);
         registerUserTeamName(sc);
-
-        // * difficulty registration
-        System.out.println("Choose wisely your desired difficulty level from 0 to 2\n0: A Walk In The Park\n1: Middle" +
-                " Of The Road\n2: Nightmare!");
-
-        boolean toExit = true;
-        while (toExit) {
-            String input = sc.nextLine();
-
-            switch (input) {
-                case "0":
-                    System.out.println("You selected: A Walk In The Park");
-                    difficulty = 0;
-                    toExit = false;
-                    break;
-                case "1":
-                    System.out.println("You selected: Middle Of The Road");
-                    difficulty = 1;
-                    toExit = false;
-                    break;
-                case "2":
-                    System.out.println("You selected: Nightmare!");
-                    difficulty = 2;
-                    toExit = false;
-                    break;
-                default:
-                    System.out.println("Selection unrecognised. Remember mortal, select from 0 to 2!");
-            }
-        }
-
-        var readFile = readFromFile("src/repository/database/IAdB/difficulty-" + difficulty + ".csv");
-
-        for (String file : readFile) {
-            System.out.println(file);
-        }
-
+        registerGameDifficulty(sc);
     }
 
     private static void registerUserName(Scanner sc) {
@@ -88,18 +58,18 @@ public class Menu {
         // Create 5 random characters
     }
 
+    private static void registerGameDifficulty(Scanner sc) throws FileNotFoundException {
+        Utils.typewriterFromString(Messages.askGameDifficulty(ConsoleColors.YELLOW_BOLD));
 
-    private static ArrayList<String> readFromFile(String path) throws FileNotFoundException {
-        File targetFile = new File(path);
-        Scanner reader = new Scanner(targetFile);
-        var readFile = new ArrayList<String>();
+        difficulty = DifficultyService.getDifficulty(sc);
+        if(difficulty == 3) {
+            Utils.typewriterFromString(Messages.retryRegisterGameDifficulty(ConsoleColors.RED));
+            registerGameDifficulty(sc);
+        }
 
-        do {
-            readFile.add(reader.nextLine());
-        } while (reader.hasNextLine());
-
-        reader.close();
-        return readFile;
+        iaParty = difficultyService.getIaPartyByDifficulty(difficulty);
+        for (String lineParty : iaParty) {
+            System.out.println(lineParty);
+        }
     }
-
 }
