@@ -1,6 +1,8 @@
 package utils;
 
 public class Messages {
+
+    public static String showWelcomeMessage;
     public static String askUserNameMsg = ConsoleColors.PURPLE + """
             So... you're a fighter right?
             Then, you want to conquest this arena! That's brave...
@@ -23,4 +25,7 @@ public class Messages {
                 Let's jump to the next part!
                 """.formatted(userName, teamName) + ConsoleColors.RESET;
     }
+
 }
+
+

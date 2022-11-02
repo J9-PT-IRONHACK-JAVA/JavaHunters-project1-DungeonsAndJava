@@ -9,6 +9,7 @@ import java.util.Scanner;
 
 public class Menu {
 
+    static String welcomeMessage;
     static String userName;
     static String teamName;
     static String computerName = "AI";
@@ -70,6 +71,11 @@ public class Menu {
             System.out.println(file);
         }
 
+    }
+
+    private static void welcomeUserName(Scanner sc) {
+        Utils.typewriterFromString(Messages.showWelcomeMessage);
+        welcomeMessage = sc.nextLine();
     }
 
     private static void registerUserName(Scanner sc) {
