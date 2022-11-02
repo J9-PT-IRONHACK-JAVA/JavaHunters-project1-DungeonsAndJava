@@ -2,22 +2,25 @@ package models;
 
 import utils.Utils;
 
+import java.util.UUID;
+
 public class Wizard extends Character {
 
     int mana, intelligence;
-
     // * Random constructor
     public Wizard(String name) {
         super(name);
+        setTypeOfCharacter("Wizard");
         wizardHp();
         setMana();
         setIntelligence();
     }
 
     // TODO: Custom constructor to implement when ready
-    public Wizard(String name, int hp, int mana, int intelligence) {
+    public Wizard(String id,String name, int hp, int mana, int intelligence) {
 
-        super(name, hp);
+        super(id,name, hp);
+        setTypeOfCharacter("Wizard");
         this.mana = mana;
         this.intelligence = intelligence;
     }
@@ -50,11 +53,33 @@ public class Wizard extends Character {
     }
 
     @Override
+    public String dataToString() {
+
+        String characterStats = "";
+
+        String parseID, parseHp, parseMana, parseIntelligence;
+
+        parseHp = String.valueOf(getHp());
+        parseID = String.valueOf(getId());
+        parseMana = String.valueOf(this.mana);
+        parseIntelligence = String.valueOf(this.intelligence);
+
+        characterStats += parseID + ", ";
+        characterStats += getTypeOfCharacter() + ", ";
+        characterStats += getName() + ", ";
+        characterStats += parseHp + ", ";
+        characterStats += parseMana + ", ";
+        characterStats += parseIntelligence;
+
+        return characterStats;
+    }
+    @Override
     public String toString() {
         String string;
         string = super.toString();
-        return string +
-                "Wizard{" +
+        return string + ","+
+
+                getTypeOfCharacter() + ","+
                 "Mana=" + mana +
                 ", Intelligence=" + intelligence +
                 '}';

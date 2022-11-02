@@ -6,7 +6,7 @@ import java.util.UUID;
 
 public abstract class Character implements Attacker {
     private UUID id = UUID.randomUUID();
-    private String name;
+    private String name, typeOfCharacter, strId;
     private int hp;
     private boolean isAlive = true;
 
@@ -16,7 +16,10 @@ public abstract class Character implements Attacker {
     }
 
     // TODO: Custom constructor to implement when ready
-    public Character(String name, int hp) {
+
+
+    public Character(String strId, String name, int hp) {
+        this.strId = strId;
         this.name = name;
         this.hp = hp;
     }
@@ -51,6 +54,17 @@ public abstract class Character implements Attacker {
 
     public void setAlive(boolean alive) {
         isAlive = alive;
+    }
+
+    public String getTypeOfCharacter() {return typeOfCharacter;}
+
+    public void setTypeOfCharacter(String typeOfCharacter) {this.typeOfCharacter = typeOfCharacter;}
+    public String getStrId() {
+        return strId;
+    }
+
+    public void setStrId(String strId) {
+        this.strId = strId;
     }
 
     @Override

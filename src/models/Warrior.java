@@ -4,24 +4,33 @@ import utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class Warrior extends Character {
 
     int stamina, strength;
 
+
+
+
     // * Random constructor
     public Warrior(String name) {
         super(name);
+        setTypeOfCharacter("Warrior");
         setStamina();
         setStrength();
         warriorHp();
+
     }
 
     // TODO: Custom constructor to implement when ready
-    public Warrior(String name, int hp, int stamina, int strength) {
-        super(name, hp);
+
+
+    public Warrior(String id, String name, int hp, int stamina, int strength) {
+        super(id, name, hp);
         this.stamina = stamina;
         this.strength = strength;
+        setTypeOfCharacter("Warrior");
     }
 
     public int getStamina() {
@@ -66,6 +75,7 @@ public class Warrior extends Character {
         parseStrength = String.valueOf(this.strength);
 
         characterStats += parseID + ", ";
+        characterStats += getTypeOfCharacter() + ", ";
         characterStats += getName() + ", ";
         characterStats += parseHp + ", ";
         characterStats += parseStamina + ", ";
@@ -78,8 +88,8 @@ public class Warrior extends Character {
     public String toString() {
         String string;
         string = super.toString();
-        return string +
-                "Warrior{" +
+        return string + ","+
+               getTypeOfCharacter() +","+
                 "stamina=" + stamina +
                 ", strength=" + strength +
                 '}';
