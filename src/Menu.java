@@ -1,6 +1,8 @@
 import models.Character;
+import models.Party;
 import models.Warrior;
 import models.Wizard;
+import org.w3c.dom.ranges.Range;
 import utils.ConsoleColors;
 import utils.Messages;
 import utils.Utils;
@@ -13,6 +15,8 @@ import java.util.Scanner;
 import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import static org.w3c.dom.ranges.Range.*;
 
 public class Menu {
 
@@ -101,14 +105,19 @@ public class Menu {
         System.out.println("Create your team: Add your characters to the team/party");
         // Create 5 random characters
     }
+    public static int selectAmountOfMembers(Scanner sc){
 
+        int amountOfMembers;
+        Utils.typewriterFromString(Messages.partyMembers(ConsoleColors.GREEN_BOLD));
+        amountOfMembers = sc.nextInt();
+        return   amountOfMembers;
+
+    }
     public static void teamUp(Scanner sc) throws FileNotFoundException {
 
-        int teamMembers;
+        int members;
         String typeOfParty;
-
-        Utils.typewriterFromString(Messages.partyMembers(ConsoleColors.GREEN_BOLD));
-        teamMembers = sc.nextInt();
+        members = selectAmountOfMembers(sc);
         //clean sc int buffer
         sc.nextLine();
 
@@ -128,6 +137,7 @@ public class Menu {
             case "2":
                 List<Character> charactersArray = loadUserCharactersFromDb();
                 showUserAvaibleCharacters(charactersArray);
+
                 break;
             case "3":
                 System.out.println("3");
@@ -228,6 +238,7 @@ public class Menu {
        return avaibleCharacters;
     }
 
+
     public static void showUserAvaibleCharacters(List<Character> avaibleCharacters){
         System.out.println("---------------------------------------------------------------------------------------------");
         System.out.printf("%10s %10s %10s %8s %20s %17s", "NUMBER", "NAME", "TYPE", "HP", "MANA/STAM", "INTEL/STREN");
@@ -253,7 +264,30 @@ public class Menu {
         }
         System.out.println("----------------------------------------------------------------------------------------------");
     }
+    public static Party saveCharactersToParty(List<Character> dbCharacters, int amountOfPartyMembers, Scanner sc){
 
+        int choise, limit;
+        Character selectedCharacter;
+
+        limit = dbCharacters.size();
+        ArrayList<Character> tempList = new ArrayList();
+
+        while( tempList.size() != amountOfPartyMembers  ){
+
+            System.out.println("Enter the character number");
+            choise = sc.nextInt();
+            if(choise < 1 || choise > limit){
+                System.out.println("Bad selection");
+            }else{
+                selectedCharacter = dbCharacters.get(choise-1);
+                tempList.add(selectedCharacter);
+            }
+
+        }
+        Party userParty = new Party(tempList);
+        return userParty;
+
+    }
     private static ArrayList<String> readFromFile(String path) throws FileNotFoundException {
         File targetFile = new File(path);
         Scanner reader = new Scanner(targetFile);
