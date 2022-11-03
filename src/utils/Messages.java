@@ -24,6 +24,24 @@ public class Messages {
                 """.formatted(userName, teamName) + ConsoleColors.RESET;
     }
 
+    public static String partyMembers(String color) {
+        return color + """
+                . . . . we come to the crucial moment of choosing who will come with you to the battle...
+                        choose the number of members your group will have.
+                """ + ConsoleColors.RESET;
+    }
+    
+    public static String partyType(String color) {
+        return color + """
+                . . . . Do you want to summon new fighthers...fight with acquaintances, or are you served by a bunch of unknown
+                 and hardened mercenaries from the most dangerous regions of the continent?.
+                 
+                 [ 1--> Create new member ] 
+                 [ 2--> Load members ]
+                 [ 3--> Random members ]
+                """ + ConsoleColors.RESET;
+    }
+    
     public static String askGameDifficulty(String color) {
          return color + """ 
                  Muahahahaha are you really a true adventurer or just a runway newbie. 
