@@ -19,8 +19,12 @@ public class Party {
 
     @Override
     public String toString() {
-        return "Party{" +
-                "characters=" + characters +
-                '}';
+        String string;
+        string = "";
+
+        for(Character character1: this.characters){
+            string+= character1.toString() + "\n";
+        }
+        return string;
     }
 }

@@ -1,4 +1,6 @@
 import models.Character;
+import java.util.Random;
+
 import models.Party;
 import models.Warrior;
 import models.Wizard;
@@ -9,10 +11,7 @@ import utils.Utils;
 
 import java.io.*;
 import java.nio.charset.CharsetEncoder;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -30,17 +29,10 @@ public class Menu {
     public static void startGame() throws FileNotFoundException {
         var sc = new Scanner(System.in);
 
-        //welcomeUserName();
+        welcomeUserName();
+        setGameSettings(sc);
 
-        /////////Dani Test use onli//////////////
-        List<Character> charactersArray = loadUserCharactersFromDb();
-        showUserAvaibleCharacters(charactersArray);
-        //setGameSettings(sc);
-
-        ////////////////////////////
-
-
-        //sc.close();
+        sc.close();
     }
 
 
@@ -49,9 +41,9 @@ public class Menu {
     }
 
     public static void setGameSettings(Scanner sc) throws FileNotFoundException {
-        //registerUserName(sc);
-        //registerUserTeamName(sc);
-        /*
+        registerUserName(sc);
+        registerUserTeamName(sc);
+
         // * difficulty registration
         System.out.println("Choose wisely your desired difficulty level from 0 to 2\n0: A Walk In The Park\n1: Middle" +
                 " Of The Road\n2: Nightmare!");
@@ -78,15 +70,15 @@ public class Menu {
                     break;
                 default:
                     System.out.println("Selection unrecognised. Remember mortal, select from 0 to 2!");
-            }*/
-            teamUp(sc);/*
+            }
+            teamUp(sc);
         }
 
         var readFile = readFromFile("src/repository/database/IAdB/difficulty-" + difficulty + ".csv");
 
         for (String file : readFile) {
             System.out.println(file);
-        }*/
+        }
 
     }
 
@@ -118,6 +110,7 @@ public class Menu {
         int members;
         String typeOfParty;
         members = selectAmountOfMembers(sc);
+        List<Character> charactersArray = loadUserCharactersFromDb();
         //clean sc int buffer
         sc.nextLine();
 
@@ -135,17 +128,84 @@ public class Menu {
 
                 break;
             case "2":
-                List<Character> charactersArray = loadUserCharactersFromDb();
                 showUserAvaibleCharacters(charactersArray);
-
+                Party newPArty =  saveCharactersToParty(charactersArray,members,sc);
+                System.out.println(newPArty.toString());
                 break;
             case "3":
-                System.out.println("3");
 
+                boolean sameRange, correctRange;
+
+                sameRange = partySameRandomRange( members ,charactersArray);
+                correctRange = partySameRandomRange(members ,charactersArray);
+
+                Party newRandomPrty = saveRandomParty(sameRange, correctRange, members, charactersArray);
+                System.out.println(newRandomPrty.toString());
                 break;
             default:
                 System.out.println("Selection unrecognised. Remember mortal, select from 1 to 3!");
         }
+
+    }
+
+    public static Party saveRandomParty(boolean correctRange, boolean sameRange, int partyMembers, List<Character>dbCharacters){
+
+        ArrayList <Character> tempCharacterList = new ArrayList<>();
+        Random random = new Random();
+        boolean exist;
+        exist = false;
+        int cont;
+
+        if( correctRange ){
+            if( sameRange ){
+                tempCharacterList.addAll(dbCharacters);
+                for(Character character: tempCharacterList){
+                    character.toString();
+                }
+            }else{
+                while(tempCharacterList.size() < partyMembers){
+                    int randomNum = random.nextInt(partyMembers + 1);
+                    if(tempCharacterList.size() == 0){
+                        tempCharacterList.add(dbCharacters.get(randomNum));
+                    }else{
+                        for (int i = 0; i < tempCharacterList.size(); i++) {
+
+                            if(tempCharacterList.get(randomNum).getName().equals(dbCharacters.get(randomNum).getName())) {
+                                exist = true;
+                            }
+                        }
+                        if(!exist){
+                            tempCharacterList.add(dbCharacters.get(randomNum));
+                        }
+
+                    }
+                }
+            }
+        }else System.out.println("You should add new members to db to a random party");
+        Party newParty = new Party(tempCharacterList);
+        return newParty;
+    }
+
+    public static boolean partySameRandomRange(int partyMembers, List<Character> dbCharacters){
+
+        boolean sameRange;
+        int dbAmountOfCharacters;
+
+        dbAmountOfCharacters = dbCharacters.size();
+
+        sameRange = ( partyMembers == dbAmountOfCharacters)? true: false;
+        return sameRange;
+
+    }
+    public static boolean partyCorrectRandomRange(int partyMembers, List<Character> dbCharacters){
+
+        boolean correctRange;
+        int dbAmountOfCharacters;
+
+        dbAmountOfCharacters = dbCharacters.size();
+
+        correctRange = ( partyMembers > dbAmountOfCharacters)? false: true;
+        return correctRange;
 
     }
 
@@ -267,24 +327,42 @@ public class Menu {
     public static Party saveCharactersToParty(List<Character> dbCharacters, int amountOfPartyMembers, Scanner sc){
 
         int choise, limit;
+        boolean exist, added;
         Character selectedCharacter;
 
+        added = false;
         limit = dbCharacters.size();
         ArrayList<Character> tempList = new ArrayList();
 
         while( tempList.size() != amountOfPartyMembers  ){
-
+            exist = false;
             System.out.println("Enter the character number");
             choise = sc.nextInt();
             if(choise < 1 || choise > limit){
                 System.out.println("Bad selection");
             }else{
-                selectedCharacter = dbCharacters.get(choise-1);
-                tempList.add(selectedCharacter);
-            }
 
+                selectedCharacter = dbCharacters.get(choise-1);
+                if(tempList.size() == 0){
+                    tempList.add(selectedCharacter);
+                }else{
+                    for (int i = 0; i < tempList.size(); i++) {
+
+                        if(selectedCharacter.getName().equals(tempList.get(i).getName())) {
+                            exist = true;
+                            System.out.println("Cannot repeat the same character");
+                        }
+                    }
+                    if(!exist){
+                        tempList.add(selectedCharacter);
+                    }
+
+                }
+
+            }
         }
         Party userParty = new Party(tempList);
+
         return userParty;
 
     }
