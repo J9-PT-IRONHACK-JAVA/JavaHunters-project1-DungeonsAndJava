@@ -1,10 +1,10 @@
 import models.Character;
 import java.util.Random;
-
 import models.Party;
 import models.Warrior;
 import models.Wizard;
 import org.w3c.dom.ranges.Range;
+import services.DifficultyService;
 import utils.ConsoleColors;
 import utils.Messages;
 import utils.Utils;
@@ -25,16 +25,24 @@ public class Menu {
     static String computerTeamName = "House of the Dragons";
     static int difficulty;
 
+    static ArrayList<String> iaParty;
+    private static DifficultyService difficultyService = new DifficultyService();
 
-    public static void startGame() throws FileNotFoundException {
+
+
+    public static void startGame() throws FileNotFoundException, InterruptedException {
         var sc = new Scanner(System.in);
 
         welcomeUserName();
+        showProgressBar();
         setGameSettings(sc);
 
         sc.close();
     }
 
+    public static void showProgressBar() throws InterruptedException {
+        Utils.progressBar(ConsoleColors.CYAN);
+    }
 
     public static void welcomeUserName() {
         System.out.println("Welcome to Dungeons And Java!");
@@ -43,43 +51,7 @@ public class Menu {
     public static void setGameSettings(Scanner sc) throws FileNotFoundException {
         registerUserName(sc);
         registerUserTeamName(sc);
-
-        // * difficulty registration
-        System.out.println("Choose wisely your desired difficulty level from 0 to 2\n0: A Walk In The Park\n1: Middle" +
-                " Of The Road\n2: Nightmare!");
-        //Put the dificult inside a method?
-        boolean toExit = true;
-        while (toExit) {
-            String input = sc.nextLine();
-
-            switch (input) {
-                case "0":
-                    System.out.println("You selected: A Walk In The Park");
-                    difficulty = 0;
-                    toExit = false;
-                    break;
-                case "1":
-                    System.out.println("You selected: Middle Of The Road");
-                    difficulty = 1;
-                    toExit = false;
-                    break;
-                case "2":
-                    System.out.println("You selected: Nightmare!");
-                    difficulty = 2;
-                    toExit = false;
-                    break;
-                default:
-                    System.out.println("Selection unrecognised. Remember mortal, select from 0 to 2!");
-            }
-            teamUp(sc);
-        }
-
-        var readFile = readFromFile("src/repository/database/IAdB/difficulty-" + difficulty + ".csv");
-
-        for (String file : readFile) {
-            System.out.println(file);
-        }
-
+        registerGameDifficulty(sc);
     }
 
     private static void registerUserName(Scanner sc) {
@@ -243,7 +215,6 @@ public class Menu {
     }
 
     public static List<Character> loadUserCharactersFromDb() throws FileNotFoundException {
-
         String filePath, tempName, tempId;
         UUID id;
         int hp, stamina, strength, parseHp, parseStamina, parseStrength, parseMana, parseIntelligence;
@@ -324,7 +295,8 @@ public class Menu {
         }
         System.out.println("----------------------------------------------------------------------------------------------");
     }
-    public static Party saveCharactersToParty(List<Character> dbCharacters, int amountOfPartyMembers, Scanner sc){
+    
+    public static Party saveCharactersToParty(List<Character> dbCharacters, int amountOfPartyMembers, Scanner sc) {
 
         int choise, limit;
         boolean exist, added;
@@ -366,17 +338,19 @@ public class Menu {
         return userParty;
 
     }
-    private static ArrayList<String> readFromFile(String path) throws FileNotFoundException {
-        File targetFile = new File(path);
-        Scanner reader = new Scanner(targetFile);
-        var readFile = new ArrayList<String>();
 
-        do {
-            readFile.add(reader.nextLine());
-        } while (reader.hasNextLine());
+    private static void registerGameDifficulty(Scanner sc) throws FileNotFoundException {
+        Utils.typewriterFromString(Messages.askGameDifficulty(ConsoleColors.YELLOW_BOLD));
 
-        reader.close();
-        return readFile;
+        difficulty = DifficultyService.getDifficulty(sc);
+        if(difficulty == 3) {
+            Utils.typewriterFromString(Messages.retryRegisterGameDifficulty(ConsoleColors.RED));
+            registerGameDifficulty(sc);
+        }
+
+        iaParty = difficultyService.getIaPartyByDifficulty(difficulty);
+        for (String lineParty : iaParty) {
+            System.out.println(lineParty);
+        }
     }
-
 }
