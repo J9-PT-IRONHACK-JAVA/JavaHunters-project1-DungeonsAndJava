@@ -23,4 +23,21 @@ public class Messages {
                 Let's jump to the next part!
                 """.formatted(userName, teamName) + ConsoleColors.RESET;
     }
+
+    public static String askGameDifficulty(String color) {
+         return color + """ 
+                 Muahahahaha are you really a true adventurer or just a runway newbie. 
+                 What is your path? 
+                 0. A Walk In The Park
+                 1. Middle Of The Road
+                 2. Nightmare! are you serious?
+                 """ + ConsoleColors.RESET;
+    }
+
+    public static String retryRegisterGameDifficulty(String color) {
+        return color + """ 
+                HAHAHA what are you trying?... 
+                Please don't be smart and select a correct difficulty
+                 """ + ConsoleColors.RESET;
+    }
 }
