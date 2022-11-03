@@ -21,16 +21,20 @@ public class Menu {
 
 
 
-    public static void startGame() throws FileNotFoundException {
+    public static void startGame() throws FileNotFoundException, InterruptedException {
         var sc = new Scanner(System.in);
 
         welcomeUserName();
+        showProgressBar();
         setGameSettings(sc);
         createPartyOfCharacters(sc);
 
         sc.close();
     }
 
+    public static void showProgressBar() throws InterruptedException {
+        Utils.progressBar(ConsoleColors.CYAN);
+    }
 
     public static void welcomeUserName() {
         System.out.println("Welcome to Dungeons And Java!");

@@ -1,7 +1,7 @@
 import java.io.FileNotFoundException;
 
 public class GameLauncher {
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws FileNotFoundException, InterruptedException {
 
         // Start the program with Menu.startGame();
         Menu.startGame();
