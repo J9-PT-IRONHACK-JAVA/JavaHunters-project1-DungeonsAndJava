@@ -52,6 +52,7 @@ public class Menu {
         registerUserName(sc);
         registerUserTeamName(sc);
         registerGameDifficulty(sc);
+        teamUp(sc);
     }
 
     private static void registerUserName(Scanner sc) {
@@ -167,17 +168,6 @@ public class Menu {
 
         sameRange = ( partyMembers == dbAmountOfCharacters)? true: false;
         return sameRange;
-
-    }
-    public static boolean partyCorrectRandomRange(int partyMembers, List<Character> dbCharacters){
-
-        boolean correctRange;
-        int dbAmountOfCharacters;
-
-        dbAmountOfCharacters = dbCharacters.size();
-
-        correctRange = ( partyMembers > dbAmountOfCharacters)? false: true;
-        return correctRange;
 
     }
 
