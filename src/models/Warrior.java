@@ -2,25 +2,17 @@ package models;
 
 import utils.Utils;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-
 public class Warrior extends Character {
 
-    int stamina, strength;
-
-
+    int stamina = Utils.getRandomNum(10, 50);
+    int strength = Utils.getRandomNum(1, 10);
 
 
     // * Random constructor
     public Warrior(String name) {
         super(name);
         setTypeOfCharacter("Warrior");
-        setStamina();
-        setStrength();
         warriorHp();
-
     }
 
     // TODO: Custom constructor to implement when ready
@@ -28,18 +20,17 @@ public class Warrior extends Character {
 
     public Warrior(String id, String name, int hp, int stamina, int strength) {
         super(id, name, hp);
-        this.stamina = stamina;
         this.strength = strength;
         setTypeOfCharacter("Warrior");
+        warriorHp();
     }
 
     public int getStamina() {
         return stamina;
     }
 
-    public void setStamina() {
-
-        this.stamina = Utils.getRandomNum(10, 50);
+    public void setStamina(int stamina) {
+        this.stamina = Math.max(stamina, 0);
     }
 
     public int getStrength() {
@@ -47,7 +38,6 @@ public class Warrior extends Character {
     }
 
     public void setStrength() {
-
         this.strength = Utils.getRandomNum(1, 10);
     }
 
@@ -58,16 +48,38 @@ public class Warrior extends Character {
     }
 
     @Override
-    public void attack() {
-        System.out.println("I'm a Warrior calling the attack() method.");
+    public int attack() {
+        int strength = getStrength();
+        int stamina = getStamina();
+
+        int dmgHeavyAttack = strength;
+        int dmgWeakAttack = strength / 2;
+
+        int attackDmg;
+
+
+        if (stamina >= strength) {
+            // * Heavy Attack
+            int newStaminaAfterAttack = stamina - 5;
+            setStamina(newStaminaAfterAttack);
+            attackDmg = dmgHeavyAttack;
+        } else {
+            // * weak attack
+            int newStaminaAfterAttack = stamina + 1;
+            setStamina(newStaminaAfterAttack);
+            attackDmg = dmgWeakAttack;
+        }
+        return attackDmg;
     }
+
 
     @Override
     public String dataToString() {
 
-       String characterStats = "";
+        String characterStats = "";
 
-        String parseID, parseHp, parseStamina, parseStrength;;
+        String parseID, parseHp, parseStamina, parseStrength;
+        ;
 
         parseHp = String.valueOf(getHp());
         parseID = String.valueOf(getId());
@@ -88,10 +100,10 @@ public class Warrior extends Character {
     public String toString() {
         String string;
         string = super.toString();
-        return string + ","+
-               getTypeOfCharacter() +","+
-                "stamina=" + stamina +
-                ", strength=" + strength +
-                '}';
+        return string + "," +
+               getTypeOfCharacter() + "," +
+               "stamina=" + stamina +
+               ", strength=" + strength +
+               '}';
     }
 }

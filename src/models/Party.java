@@ -9,8 +9,22 @@ public class Party {
         this.characters = characters;
     }
 
+    public Party(){
+
+    }
+
     public ArrayList<Character> getCharacters() {
         return characters;
+    }
+
+    public ArrayList<Character> getAliveCharacters(){
+        ArrayList<Character> charactersAlive = new ArrayList<>();
+        for (Character character: characters) {
+            if(character.isAlive()){
+                charactersAlive.add(character);
+            }
+        }
+        return charactersAlive;
     }
 
     public void setCharacters(ArrayList<Character> characters) {

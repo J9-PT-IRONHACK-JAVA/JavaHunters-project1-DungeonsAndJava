@@ -9,6 +9,7 @@ public abstract class Character implements Attacker {
     private String name, typeOfCharacter, strId;
     private int hp;
     private boolean isAlive = true;
+    private boolean hasPlay = false;
 
     // * Random constructor
     public Character(String name) {
@@ -55,6 +56,10 @@ public abstract class Character implements Attacker {
     public void setAlive(boolean alive) {
         isAlive = alive;
     }
+
+    public boolean hasPlay(){return hasPlay;}
+
+    public void setHasPlay(boolean play) {hasPlay = play;}
 
     public String getTypeOfCharacter() {return typeOfCharacter;}
 
