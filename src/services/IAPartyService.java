@@ -1,16 +1,19 @@
 package services;
 
-import repository.DifficultyRepositoryImp;
+import models.Character;
+import models.Party;
+import repository.IAPartyRepositoryImp;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
-public class DifficultyService {
-    private final DifficultyRepositoryImp difficultyRepository;
+public class IAPartyService {
+    private final IAPartyRepositoryImp difficultyRepository;
 
-    public DifficultyService() {
-        difficultyRepository = new DifficultyRepositoryImp();
+    public IAPartyService() {
+        difficultyRepository = new IAPartyRepositoryImp();
     }
 
     public static int getDifficulty(Scanner sc) {
@@ -45,7 +48,7 @@ public class DifficultyService {
         return difficulty;
     }
 
-    public ArrayList<String> getIaPartyByDifficulty(int difficulty) throws FileNotFoundException {
+    public List<Character> getIaPartyByDifficulty(int difficulty) throws FileNotFoundException {
         return difficultyRepository.getIaPartyByDifficulty(difficulty);
     }
 }

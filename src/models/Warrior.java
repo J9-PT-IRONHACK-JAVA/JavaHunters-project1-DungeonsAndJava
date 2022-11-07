@@ -38,7 +38,6 @@ public class Warrior extends Character {
     }
 
     public void setStamina() {
-
         this.stamina = Utils.getRandomNum(10, 50);
     }
 
