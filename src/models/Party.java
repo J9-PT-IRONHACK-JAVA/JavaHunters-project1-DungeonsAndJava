@@ -17,6 +17,16 @@ public class Party {
         return characters;
     }
 
+    public ArrayList<Character> getAliveCharacters(){
+        ArrayList<Character> charactersAlive = new ArrayList<>();
+        for (Character character: characters) {
+            if(character.isAlive()){
+                charactersAlive.add(character);
+            }
+        }
+        return charactersAlive;
+    }
+
     public void setCharacters(ArrayList<Character> characters) {
         this.characters = characters;
     }
