@@ -58,7 +58,10 @@ public abstract class Character implements Attacker {
 
     public String getTypeOfCharacter() {return typeOfCharacter;}
 
-    public void setTypeOfCharacter(String typeOfCharacter) {this.typeOfCharacter = typeOfCharacter;}
+    public void setTypeOfCharacter(String typeOfCharacter) {
+        this.typeOfCharacter = typeOfCharacter;
+    }
+
     public String getStrId() {
         return strId;
     }
@@ -72,6 +75,8 @@ public abstract class Character implements Attacker {
         return "Character{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", typeOfCharacter='" + typeOfCharacter + '\'' +
+                ", strId='" + strId + '\'' +
                 ", hp=" + hp +
                 ", isAlive=" + isAlive +
                 '}';

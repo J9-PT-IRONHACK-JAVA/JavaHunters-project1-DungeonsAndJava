@@ -9,6 +9,10 @@ public class Party {
         this.characters = characters;
     }
 
+    public Party(){
+
+    }
+
     public ArrayList<Character> getCharacters() {
         return characters;
     }
@@ -23,7 +27,7 @@ public class Party {
         string = "";
 
         for(Character character1: this.characters){
-            string+= character1.toString() + "\n";
+            string += character1.toString() + "\n";
         }
         return string;
     }
