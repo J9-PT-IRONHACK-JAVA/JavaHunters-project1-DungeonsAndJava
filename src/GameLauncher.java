@@ -12,7 +12,9 @@ public class GameLauncher {
 
     public static void main(String[] args) throws FileNotFoundException, InterruptedException {
         // Start the program with Menu.startGame();
-        // Menu.startGame();
+        Menu.startGame();
+
+        /*
         ArrayList<Character> userPartyCharacters = new ArrayList<>();
         userPartyCharacters.add(new Warrior("User Character One"));
         userPartyCharacters.add(new Wizard("User Character Two"));
@@ -23,7 +25,7 @@ public class GameLauncher {
 
         var userParty = new Party(userPartyCharacters);
         var IAParty = new Party(IAPartyCharacters);
-        Menu.startFight(userParty, IAParty);
+        Menu.startFight(userParty, IAParty);*/
 
         // * Tests with classes START >>>>>>>>>>>>>
         System.out.println(">>> Tests with classes START >>>>>>>");
