@@ -35,7 +35,6 @@ public class Messages {
         return color + """
                 Do you want to summon new fighters...fight with acquaintances, or are you served by a bunch of unknown
                 and hardened mercenaries from the most dangerous regions of the continent?.
-                 
                  [ 1--> Create new member ] 
                  [ 2--> Load members ]
                  [ 3--> Random members ]
@@ -46,7 +45,6 @@ public class Messages {
          return color + """ 
                  Muahahahaha are you really a true adventurer or just a runway newbie. 
                  What is your path? 
-                 
                  [ 0--> A Walk In The Park ] 
                  [ 1--> Middle Of The Road ]
                  [ 2--> Nightmare! are you serious? ]
