@@ -35,12 +35,28 @@ public class Messages {
         return color + """
                 Do you want to summon new fighters...fight with acquaintances, or are you served by a bunch of unknown
                 and hardened mercenaries from the most dangerous regions of the continent?.
-                 [ 1--> Create new member ] 
-                 [ 2--> Load members ]
-                 [ 3--> Random members ]
+                 [ 1--> Load members ]
+                 [ 2--> Random members ]
                 """ + ConsoleColors.RESET;
     }
-    
+
+    public static String askCharacterCreation(String color) {
+        return color + """
+                 Do you want to summon new fighters...
+                 fight with acquaintances, or are you served by a bunch of unknown
+                 [ 0--> Yes, I want to create a character ] 
+                 [ 1--> NO!! I trust in created characters ]
+                 """ + ConsoleColors.RESET;
+    }
+
+    public static String askNewCharacterCreation(String color) {
+        return color + """
+                 Do you want to create a more characters?
+                 [ 0--> Yes, I want ANOTHER!!! Grrrr!!] 
+                 [ 1--> NO!! I'm tired. It's enough ]
+                 """ + ConsoleColors.RESET;
+    }
+
     public static String askGameDifficulty(String color) {
          return color + """ 
                  Muahahahaha are you really a true adventurer or just a runway newbie. 

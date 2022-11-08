@@ -18,7 +18,7 @@ public class IAPartyService {
 
     public static int getDifficulty(Scanner sc) {
         boolean toExit = true;
-        int difficulty = 3;
+        int difficulty = -1;
         while (toExit) {
             String input = sc.nextLine();
 

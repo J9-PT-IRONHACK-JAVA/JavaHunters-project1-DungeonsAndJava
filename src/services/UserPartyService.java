@@ -84,7 +84,7 @@ public class UserPartyService {
         return sameRange;
     }
 
-    public static Character createNewCharacter(Scanner sc){
+    public static Character createNewCharacter(Scanner sc) {
         String name, type;
         Character newCharacter = null;
         System.out.println("""
@@ -93,7 +93,9 @@ public class UserPartyService {
                 [  2 --> Wizard  ]
                 """);
         type = sc.nextLine();
+
         System.out.println("Character name");
+
         name = sc.nextLine();
 
         if(type.equals("1")) {

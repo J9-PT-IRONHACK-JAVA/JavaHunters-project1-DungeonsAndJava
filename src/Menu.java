@@ -8,6 +8,7 @@ import utils.Messages;
 import utils.Utils;
 import java.io.*;
 import java.util.*;
+import static java.lang.Integer.parseInt;
 
 public class Menu {
     static String userName;
@@ -39,16 +40,9 @@ public class Menu {
     public static void setGameSettings(Scanner sc) throws FileNotFoundException {
         registerUserName(sc);
         registerUserTeamName(sc);
+        customCharacterCreation(sc);
         var userParty = registerUserParty(sc);
-
-        System.out.println("USER PARTY");
-        System.out.println(userParty.toString());
-
         var iaParty = registerIAParty(sc);
-
-        System.out.println("IA PARTY");
-        System.out.println(iaParty.toString());
-
         startFight(userParty, iaParty);
     }
 
@@ -61,6 +55,26 @@ public class Menu {
         Utils.typewriterFromString(Messages.askTeamNameMsg(userName, ConsoleColors.GREEN_BOLD));
         teamName = sc.nextLine();
         Utils.typewriterFromString(Messages.endUserRegistrationMsg(userName, teamName, ConsoleColors.BLUE));
+    }
+
+    private static void customCharacterCreation(Scanner sc) {
+        Utils.typewriterFromString(Messages.askCharacterCreation(ConsoleColors.YELLOW_BOLD));
+        var hasCharacterSelection = sc.nextLine();
+
+        if(hasCharacterSelection.equals("0")) {
+            Character character;
+            String CharacterToString;
+
+            character = userPartyService.createNewCharacter(sc);
+            CharacterToString = character.dataToString();
+            userPartyService.saveCharacterToDb(CharacterToString);
+
+            Utils.typewriterFromString(Messages.askNewCharacterCreation(ConsoleColors.YELLOW_BOLD));
+            var createNewCharacter = sc.nextLine();
+            if(createNewCharacter.equals("0")) {
+                customCharacterCreation(sc);
+            }
+        }
     }
 
     public static Party registerUserParty(Scanner sc) throws FileNotFoundException {
@@ -76,20 +90,20 @@ public class Menu {
         Party userParty = new Party();
 
         switch ( typeOfParty ) {
-            case "1":
+            /*case "1":
                 Character character;
                 String CharacterToString;
 
                 character = UserPartyService.createNewCharacter(sc);
                 CharacterToString = character.dataToString();
                 userPartyService.saveCharacterToDb(CharacterToString);
-                break;
-            case "2":
+                break;*/
+            case "1":
                 UserPartyService.showUserAvailableCharacters(charactersArray);
                 userParty = UserPartyService.saveCharactersToParty(charactersArray,members,sc);
                 System.out.println(userParty.toString());
                 break;
-            case "3":
+            case "2":
                 /*
                 boolean sameRange, correctRange;
                 sameRange = UserPartyService.partySameRandomRange(members ,charactersArray);
@@ -108,8 +122,9 @@ public class Menu {
 
     private static Party registerIAParty(Scanner sc) throws FileNotFoundException {
         Utils.typewriterFromString(Messages.askGameDifficulty(ConsoleColors.YELLOW_BOLD));
+        var difficultySelection = sc.nextInt();
 
-        if(IAPartyService.getDifficulty(sc) == 3) {
+        if(IAPartyService.getDifficulty(sc) == difficultySelection) {
             Utils.typewriterFromString(Messages.retryRegisterGameDifficulty(ConsoleColors.RED));
             registerIAParty(sc);
         }

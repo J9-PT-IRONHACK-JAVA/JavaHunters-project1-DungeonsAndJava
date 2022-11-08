@@ -5,8 +5,9 @@ import models.Party;
 
 import java.util.ArrayList;
 
-public class CombatService {
 
+
+public class CombatService {
     public static ArrayList<Character> makeCombatBetweenRandomCharacters(Party userParty, Party iaParty) {
         Character userPartyCharacter = getRandomUserCharacter(userParty);
         Character iaRandomCharacter = getRandomIaCharacter(iaParty);
@@ -40,17 +41,29 @@ public class CombatService {
         }
 
 
-        // TODO ! >>>>> Be able to add all the dead characters. At this moment is just adding one of them.
-
         var listOfDeadCharacters = new ArrayList<Character>();
 
-        if(!userPartyCharacter.isAlive()){
-            listOfDeadCharacters.add(userPartyCharacter);
+        // TODO ! >>>>> Add if character is from IA or is From User
+        for (Character character: userParty.getCharacters()) {
+            if(!character.isAlive()) {
+                listOfDeadCharacters.add(character);
+            }
         }
 
-        if(!iaRandomCharacter.isAlive()){
-            listOfDeadCharacters.add(iaRandomCharacter);
+        for (Character character: iaParty.getCharacters()) {
+            if(!character.isAlive()) {
+                listOfDeadCharacters.add(character);
+            }
         }
+
+        UserPartyService.showUserAvailableCharacters(listOfDeadCharacters);
+
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
 
 
         return listOfDeadCharacters;
