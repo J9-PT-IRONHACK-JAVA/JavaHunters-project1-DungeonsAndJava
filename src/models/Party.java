@@ -37,7 +37,7 @@ public class Party {
         string = "";
 
         for(Character character1: this.characters){
-            string+= character1.toString() + "\n";
+            string += character1.toString() + "\n";
         }
         return string;
     }
