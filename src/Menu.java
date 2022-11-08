@@ -1,5 +1,6 @@
 import models.Character;
 import models.Party;
+import services.CombatService;
 import services.IAPartyService;
 import services.UserPartyService;
 import utils.ConsoleColors;
@@ -11,11 +12,10 @@ import java.util.*;
 public class Menu {
     static String userName;
     static String teamName;
-    static String computerName = "AI";
-    static String computerTeamName = "House of the Dragons";
     static int difficulty;
     private static final IAPartyService IAPartyService = new IAPartyService();
     private static final UserPartyService userPartyService = new UserPartyService();
+    private static final CombatService combatService = new CombatService();
     private static Party localUserParty;
 
     public static void startGame() throws FileNotFoundException, InterruptedException {
@@ -48,6 +48,8 @@ public class Menu {
 
         System.out.println("IA PARTY");
         System.out.println(iaParty.toString());
+
+        startFight(userParty, iaParty);
     }
 
     private static void registerUserName(Scanner sc) {
@@ -88,9 +90,11 @@ public class Menu {
                 System.out.println(userParty.toString());
                 break;
             case "3":
-                /* boolean sameRange, correctRange;
+                /*
+                boolean sameRange, correctRange;
                 sameRange = UserPartyService.partySameRandomRange(members ,charactersArray);
-                correctRange = UserPartyService.partySameRandomRange(members ,charactersArray);*/
+                correctRange = UserPartyService.partySameRandomRange(members ,charactersArray);
+                */
 
                 userParty = UserPartyService.saveRandomParty(true, true, members, charactersArray);
                 break;
@@ -120,83 +124,10 @@ public class Menu {
     static void startFight(Party userParty, Party iaParty) {
         var combat = new ArrayList<Character>();
         do {
-            combat = makeCombatBetweenRandomCharacters(userParty, iaParty);
+            combat = combatService.makeCombatBetweenRandomCharacters(userParty, iaParty);
         } while (userParty.getAliveCharacters().size() > 0 && iaParty.getAliveCharacters().size() > 0);
 
         System.out.println("<<<<<<<<<<<<<<<<<<<<<<< Graveyard:");
         System.out.println(combat);
-    }
-
-    private static ArrayList<Character> makeCombatBetweenRandomCharacters(Party userParty, Party iaParty) {
-        Character userPartyCharacter = getRandomUserCharacter(userParty);
-        Character iaRandomCharacter = getRandomIaCharacter(iaParty);
-
-        do {
-            var characterAttackDmg = userPartyCharacter.attack();
-
-            iaRandomCharacter.setHp(iaRandomCharacter.getHp() - characterAttackDmg);
-
-            if (iaRandomCharacter.getHp() <= 0) {
-                iaRandomCharacter.setAlive(false);
-            }
-
-            var iaAttackDmg = iaRandomCharacter.attack();
-            userPartyCharacter.setHp(userPartyCharacter.getHp() - iaAttackDmg);
-
-            if (userPartyCharacter.getHp() <= 0) {
-                userPartyCharacter.setAlive(false);
-            }
-
-        } while (iaRandomCharacter.isAlive() && userPartyCharacter.isAlive());
-
-
-
-        if(userPartyCharacter.isAlive()){
-        System.out.println("User character: " + userPartyCharacter.getName() + " has won vs " + iaRandomCharacter.getName());
-        }
-
-        if(iaRandomCharacter.isAlive()){
-            System.out.println("IA character: " + iaRandomCharacter.getName() + " has won vs " + userPartyCharacter.getName());
-        }
-
-
-        // TODO ! >>>>> Be able to add all the dead characters. At this moment is just adding one of them.
-
-        var listOfDeadCharacters = new ArrayList<Character>();
-
-            if(!userPartyCharacter.isAlive()){
-                listOfDeadCharacters.add(userPartyCharacter);
-            }
-
-            if(!iaRandomCharacter.isAlive()){
-                listOfDeadCharacters.add(iaRandomCharacter);
-            }
-
-
-        return listOfDeadCharacters;
-    }
-
-    private static Character getRandomIaCharacter(Party iaParty) {
-        var iaPartyCharacters = iaParty.getAliveCharacters();
-        int atRandomIndex = 0;
-        for (int i = 0; i < iaPartyCharacters.size(); i++) {
-            atRandomIndex = (int) (Math.random() * iaPartyCharacters.size());
-        }
-        if(!iaPartyCharacters.get(atRandomIndex).hasPlay()){
-            return iaPartyCharacters.get(atRandomIndex);
-        }
-        return null;
-    }
-
-    private static Character getRandomUserCharacter(Party userParty) {
-        var userPartyCharacters = userParty.getAliveCharacters();
-        int atRandomIndex = 0;
-        for (int i = 0; i < userPartyCharacters.size(); i++) {
-            atRandomIndex = (int) (Math.random() * userPartyCharacters.size());
-        }
-        if(!userPartyCharacters.get(atRandomIndex).hasPlay()){
-        return userPartyCharacters.get(atRandomIndex);
-        }
-        return null;
     }
 }
