@@ -32,14 +32,14 @@ public class IAPartyService {
                     difficulty = 0;
                     break;
                 case 1:
-                    var message = "You selected: Middle Of The Road";
-                    Utils.typewriterFromString(Messages.printSelectedDifficulty(message, ConsoleColors.BLUE_BOLD_BRIGHT), 5);
+                    var message1 = "You selected: Middle Of The Road";
+                    Utils.typewriterFromString(Messages.printSelectedDifficulty(message1, ConsoleColors.BLUE_BOLD_BRIGHT), 5);
                     toExit = false;
                     difficulty = 1;
                     break;
                 case 2:
-                    var message = "You selected: Nightmare!";
-                    Utils.typewriterFromString(Messages.printSelectedDifficulty(message, ConsoleColors.BLUE_BOLD_BRIGHT), 5);
+                    var message2 = "You selected: Nightmare!";
+                    Utils.typewriterFromString(Messages.printSelectedDifficulty(message2, ConsoleColors.BLUE_BOLD_BRIGHT), 5);
                     toExit = false;
                     difficulty = 2;
                     break;
