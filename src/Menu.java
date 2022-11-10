@@ -25,7 +25,7 @@ public class Menu {
     public static void startGame() throws IOException, InterruptedException, LineUnavailableException {
         var sc = new Scanner(System.in);
 
-            /*Utils.makeSound("./assets/backgroundMusic.wav");
+            Utils.makeSound("./assets/backgroundMusic.wav");
             Thread.sleep(4000);
             System.out.println(" ");
             System.out.println(" ");
@@ -44,7 +44,7 @@ public class Menu {
 
 
         welcomeUserName();
-        showProgressBar();*/
+        showProgressBar();
         setGameSettings(sc);
 
         sc.close();
