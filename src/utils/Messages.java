@@ -14,12 +14,12 @@ public class Messages {
             """ + ConsoleColors.RESET;
     public static String askUserNameMsg = ConsoleColors.BLUE_BOLD_BRIGHT + """
                         
-                        |-------------------------------------------------------|
-                        | So... you're a fighter right?                         |
-                        | Then, you want to conquest this arena! That's brave...|
-                        | Let's start by writing your name.                     |
-                        | Who are you?                                          |
-                        |-------------------------------------------------------|
+                            |-------------------------------------------------------|
+                            | So... you're a fighter right?                         |
+                            | Then, you want to conquest this arena! That's brave...|
+                            | Let's start by writing your name.                     |
+                            | Who are you?                                          |
+                            |-------------------------------------------------------|
                         
             """ + ConsoleColors.RESET;
 
@@ -121,13 +121,13 @@ public class Messages {
     public static String askNewCharacterCreation(String color) {
         return color + """
                  
-                         |------------------------------------------|
-                         | Do you want to create a more characters? |
-                         |                                          |
-                         |   [ 0--> Yes, I want ANOTHER!!! Grrrr!!] |
-                         |   [ 1--> NO!! I'm tired. It's enough ]   |
-                         |                                          |
-                         |------------------------------------------|
+                             |------------------------------------------|
+                             | Do you want to create a more characters? |
+                             |                                          |
+                             |   [ 0--> Yes, I want ANOTHER!!! Grrrr!!] |
+                             |   [ 1--> NO!! I'm tired. It's enough ]   |
+                             |                                          |
+                             |------------------------------------------|
                  
                  """ + ConsoleColors.RESET;
     }
@@ -135,13 +135,13 @@ public class Messages {
     public static String caracterType(String color) {
         return color + """
 
-                         |------------------------------------------|
-                         | Select your class?                       |
-                         |                                          |
-                         |   [  1 --> Warrior ]                     |
-                         |   [  2 --> Wizard  ]                     |
-                         |                                          |
-                         |------------------------------------------|
+                             |------------------------------------------|
+                             | Select your class?                       |
+                             |                                          |
+                             |   [  1 --> Warrior ]                     |
+                             |   [  2 --> Wizard  ]                     |
+                             |                                          |
+                             |------------------------------------------|
                  
                  """ + ConsoleColors.RESET;
     }
@@ -149,19 +149,19 @@ public class Messages {
     public static String caracterName(String color) {
         return color + """
 
-                         |------------------------------------------|
-                         | What is your character Name?             |
-                         |------------------------------------------|
+                             |------------------------------------------|
+                             | What is your character Name?             |
+                             |------------------------------------------|
                  
                  """ + ConsoleColors.RESET;
     }
 
     public static String badSelection(String color) {
         return color + """
-
-                         |------------------------------------------------|
-                         | HAHAHA NO!. Select correct character number    |
-                         |------------------------------------------------|
+    
+                             |------------------------------------------------|
+                             | HAHAHA NO!. Select correct character number    |
+                             |------------------------------------------------|
                  
                  """ + ConsoleColors.RESET;
     }
@@ -170,10 +170,10 @@ public class Messages {
     public static String newCharacterCreated(String name, String color) {
         return color + """
 
-                         |------------------------------------------|
-                         | New Character has been created...        |
-                         | %s                                       |
-                         |------------------------------------------|
+                             |------------------------------------------|
+                             | New Character has been created...        |
+                             | %s                                       |
+                             |------------------------------------------|
                  
                  """.formatted(name) + ConsoleColors.RESET;
     }
@@ -197,77 +197,77 @@ public class Messages {
     public static String retryRegisterGameDifficulty(String color) {
         return color + """ 
                 
-                        |----------------------------------------------|
-                        | Hey! What are you trying?                    |
-                        | Are the instructions not clear?              |
-                        | Please don't think you are smarter than me   |
-                        | and select a correct difficulty              |
-                        |----------------------------------------------|
+                            |----------------------------------------------|
+                            | Hey! What are you trying?                    |
+                            | Are the instructions not clear?              |
+                            | Please don't think you are smarter than me   |
+                            | and select a correct difficulty              |
+                            |----------------------------------------------|
                
                 """ + ConsoleColors.RESET;
     }
 
     public static String startTheBattleMsg = ConsoleColors.BLUE_BOLD_BRIGHT + """
                         
-                        |------------------------------------------------------------------------------------|
-                        | We have all ready to start...                                                      |
-                        | What you are about to see is unique, so keep your eyes peeled.                     |
-                        | A single mistake, and both you and your soldiers will be grass in the graveyard... |
-                        |------------------------------------------------------------------------------------|
+                            |------------------------------------------------------------------------------------|
+                            | We have all ready to start...                                                      |
+                            | What you are about to see is unique, so keep your eyes peeled.                     |
+                            | A single mistake, and both you and your soldiers will be grass in the graveyard... |
+                            |------------------------------------------------------------------------------------|
                         
             """ + ConsoleColors.RESET;
 
     public static String enterCharacterNumber = ConsoleColors.BLUE_BOLD_BRIGHT + """
                         
-                        |------------------------------------------------------------------------------------|
-                        |           Enter the number of the character that you want to use                   |
-                        |------------------------------------------------------------------------------------|
+                            |------------------------------------------------------------------------------------|
+                            |           Enter the number of the character that you want to use                   |
+                            |------------------------------------------------------------------------------------|
                         
             """ + ConsoleColors.RESET;
 
     public static String battleStarts = ConsoleColors.PURPLE_BOLD_BRIGHT + """
                         
-                        |------------------------------------------------------------------------------------|
-                        |xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx|
-                        |                               LET THE BATTLE BEGIN!                                |
-                        |xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx|
-                        |------------------------------------------------------------------------------------|
+                            |------------------------------------------------------------------------------------|
+                            |xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx|
+                            |                               LET THE BATTLE BEGIN!                                |
+                            |xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx|
+                            |------------------------------------------------------------------------------------|
                         
             """ + ConsoleColors.RESET;
 
     public static String aiWinComabt = ConsoleColors.BLUE_BOLD_BRIGHT + """
                         
-                        |------------------------------------------------------------------------------------|
-                        |        😈😈 AI has win this combat! You need to do better job mate... 😈😈        |
-                        |------------------------------------------------------------------------------------|
+                            |------------------------------------------------------------------------------------|
+                            |        😈😈 AI has win this combat! You need to do better job mate... 😈😈        |
+                            |------------------------------------------------------------------------------------|
                         
             """ + ConsoleColors.RESET;
 
     public static String userWinCombat = ConsoleColors.BLUE_BOLD_BRIGHT + """
                         
-                        |------------------------------------------------------------------------------------|
-                        |                      🙄🙄 You win this combat! Good job... 🙄🙄                   |
-                        |------------------------------------------------------------------------------------|
+                            |------------------------------------------------------------------------------------|
+                            |                      🙄🙄 You win this combat! Good job... 🙄🙄                   |
+                            |------------------------------------------------------------------------------------|
                         
             """ + ConsoleColors.RESET;
 
     public static String userWonGame = ConsoleColors.PURPLE_BOLD_BRIGHT + """
                         
-                        |------------------------------------------------------------------------------------|
-                        |xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx|
-                        |                          YOU WIN THE GAME! CONGRATULATIONS                         |
-                        |xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx|
-                        |------------------------------------------------------------------------------------|
+                            |------------------------------------------------------------------------------------|
+                            |xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx|
+                            |                          YOU WIN THE GAME! CONGRATULATIONS                         |
+                            |xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx|
+                            |------------------------------------------------------------------------------------|
                         
             """ + ConsoleColors.RESET;
 
     public static String aiWonGame = ConsoleColors.RED_BOLD_BRIGHT + """
                         
-                        |------------------------------------------------------------------------------------|
-                        |xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx|
-                        |              😈😈 IA WON THIS WAR! YOU'RE SUCH A LOOSER! 😈😈                     |
-                        |xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx|
-                        |------------------------------------------------------------------------------------|
+                            |------------------------------------------------------------------------------------|
+                            |xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx|
+                            |              😈😈 IA WON THIS WAR! YOU'RE SUCH A LOOSER! 😈😈                     |
+                            |xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx|
+                            |------------------------------------------------------------------------------------|
                         
             """ + ConsoleColors.RESET;
 }
