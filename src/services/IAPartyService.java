@@ -26,17 +26,20 @@ public class IAPartyService {
 
             switch (difficultySelection) {
                 case 0:
-                    Utils.typewriterFromString(Messages.printSelectedDifficulty("You selected: A Walk In The Park", ConsoleColors.BLUE_BOLD_BRIGHT), 5);
+                    var message = "You selected: A Walk In The Park";
+                    Utils.typewriterFromString(Messages.printSelectedDifficulty(message, ConsoleColors.BLUE_BOLD_BRIGHT), 5);
                     toExit = false;
                     difficulty = 0;
                     break;
                 case 1:
-                    Utils.typewriterFromString(Messages.printSelectedDifficulty("You selected: Middle Of The Road", ConsoleColors.BLUE_BOLD_BRIGHT), 5);
+                    var message = "You selected: Middle Of The Road";
+                    Utils.typewriterFromString(Messages.printSelectedDifficulty(message, ConsoleColors.BLUE_BOLD_BRIGHT), 5);
                     toExit = false;
                     difficulty = 1;
                     break;
                 case 2:
-                    Utils.typewriterFromString(Messages.printSelectedDifficulty("You selected: Nightmare!", ConsoleColors.BLUE_BOLD_BRIGHT), 5);
+                    var message = "You selected: Nightmare!";
+                    Utils.typewriterFromString(Messages.printSelectedDifficulty(message, ConsoleColors.BLUE_BOLD_BRIGHT), 5);
                     toExit = false;
                     difficulty = 2;
                     break;
