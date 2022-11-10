@@ -10,6 +10,7 @@ import utils.ConsoleColors;
 import utils.Messages;
 import utils.Utils;
 
+import java.io.Console;
 import java.io.FileNotFoundException;
 import java.util.*;
 
@@ -23,7 +24,7 @@ public class UserPartyService {
 
     public static int selectAmountOfMembers(Scanner sc){
         int amountOfMembers;
-        Utils.typewriterFromString(Messages.partyMembers(ConsoleColors.GREEN_BOLD));
+        Utils.typewriterFromString(Messages.partyMembers(ConsoleColors.BLUE_BOLD_BRIGHT), 5);
         amountOfMembers = sc.nextInt();
         return amountOfMembers;
     }
@@ -158,10 +159,14 @@ public class UserPartyService {
     }
 
     public static void showUserAvailableCharacters(List<Character> availableCharacters) {
-        System.out.println("---------------------------------------------------------------------------------------------");
-        System.out.printf("%10s %10s %10s %8s %20s %17s", "NUMBER", "NAME", "TYPE", "HP", "MANA/STAM", "INTEL/STREN");
-        System.out.println();
-        System.out.println("---------------------------------------------------------------------------------------------");
+        System.out.println(" ");
+        System.out.println(" ");
+        System.out.printf(utils.ConsoleColors.PURPLE_BOLD_BRIGHT + "%10s %20s %10s %10s %20s " +
+                                                "%20s",
+                "NUMBER" , "NAME", "TYPE", "HP", "MANA/STAM", "INTEL/STREN" + ConsoleColors.RESET);
+        System.out.println(" ");
+        System.out.println(ConsoleColors.PURPLE_BOLD_BRIGHT +
+                "---------------------------------------------------------------------------------------------" + ConsoleColors.RESET);
         int i;
         i = 1;
 
@@ -169,16 +174,25 @@ public class UserPartyService {
         {
             if(character.getTypeOfCharacter().equals("Wizard")){
                 Wizard tempWizard = (Wizard) character;
-                System.out.format("%7s %12s %14s %7s %15s %22s",i, tempWizard.getName(), tempWizard.getTypeOfCharacter(), tempWizard.getHp(), tempWizard.getMana(), tempWizard.getIntelligence());
+                System.out.format(ConsoleColors.CYAN_BOLD_BRIGHT + "%10s %20s %10s %10s %20s %20s",i,
+                        tempWizard.getName(),
+                        tempWizard.getTypeOfCharacter(), tempWizard.getHp(), tempWizard.getMana(),
+                        tempWizard.getIntelligence() + ConsoleColors.RESET);
             }
             else if( character.getTypeOfCharacter().equals("Warrior") ){
                 Warrior tempWarrior = (Warrior) character;
-                System.out.format("%7s %12s %14s %7s %15s %22s",i ,tempWarrior.getName(), tempWarrior.getTypeOfCharacter(), tempWarrior.getHp(), tempWarrior.getStamina(), tempWarrior.getStrength());
+                System.out.format(ConsoleColors.CYAN_BOLD_BRIGHT + "%10s %20s %10s %10s %20s %20s",i ,
+                        tempWarrior.getName(),
+                        tempWarrior.getTypeOfCharacter(), tempWarrior.getHp(), tempWarrior.getStamina(),
+                        tempWarrior.getStrength() + ConsoleColors.RESET);
             }
             System.out.println();
             i++;
         }
-        System.out.println("----------------------------------------------------------------------------------------------");
+        System.out.println(ConsoleColors.PURPLE_BOLD_BRIGHT +
+                           "---------------------------------------------------------------------------------------------" + ConsoleColors.RESET);
+        System.out.println(" ");
+        System.out.println(" ");
     }
 
     public static Party saveCharactersToParty(List<Character> dbCharacters, int amountOfPartyMembers, Scanner sc) {
@@ -190,7 +204,7 @@ public class UserPartyService {
 
         while( tempList.size() != amountOfPartyMembers  ){
             exist = false;
-            System.out.println("Enter the character number");
+            Utils.typewriterFromString(Messages.enterCharacterNumber, 5);
             choice = sc.nextInt();
             if(choice < 1 || choice > limit){
                 System.out.println("Bad selection");

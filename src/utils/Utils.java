@@ -1,5 +1,9 @@
 package utils;
 
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import java.io.File;
 import java.util.Random;
 
 public class Utils {
@@ -14,12 +18,11 @@ public class Utils {
         return randomNum;
     }
 
-    public static void typewriterFromString(String stringToApplyEffect) {
-        int typewriterDelay = 50;
+    public static void typewriterFromString(String stringToApplyEffect, int delay) {
         for (int i = 0; i < stringToApplyEffect.length(); i++) {
             System.out.print(stringToApplyEffect.charAt(i));
             try {
-                Thread.sleep(typewriterDelay);
+                Thread.sleep(delay);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
@@ -46,5 +49,17 @@ public class Utils {
             stringBuilder.append(' ');
         }
         return stringBuilder.toString();
+    }
+
+    public static void makeSound(String path) throws LineUnavailableException {
+        File lol = new File(path);
+        Clip clip = AudioSystem.getClip();
+
+        try{
+            clip.open(AudioSystem.getAudioInputStream(lol));
+            clip.start();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }

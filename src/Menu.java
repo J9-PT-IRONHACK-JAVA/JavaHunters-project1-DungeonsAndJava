@@ -6,6 +6,8 @@ import services.UserPartyService;
 import utils.ConsoleColors;
 import utils.Messages;
 import utils.Utils;
+
+import javax.sound.sampled.LineUnavailableException;
 import java.io.*;
 import java.util.*;
 import static java.lang.Integer.parseInt;
@@ -19,8 +21,27 @@ public class Menu {
     private static final CombatService combatService = new CombatService();
     private static Party localUserParty;
 
-    public static void startGame() throws FileNotFoundException, InterruptedException {
+
+    public static void startGame() throws IOException, InterruptedException, LineUnavailableException {
         var sc = new Scanner(System.in);
+
+            Utils.makeSound("./assets/backgroundMusic.wav");
+            Thread.sleep(4000);
+            System.out.println(" ");
+            System.out.println(" ");
+            Utils.typewriterFromString( "  " + ConsoleColors.PURPLE_BOLD_BRIGHT + "Carlos de Miguel 🦸‍, Adrián " +
+                                        "Paniagua 🧙‍ & Dani Roman 🧝 " +
+                                               "presents...", 50);
+            System.out.println(" ");
+            System.out.println(" ");
+            Utils.typewriterFromString( "  " + "With the collaboration of Ironhack Barcelona 🏫 and...", 50);
+            System.out.println(" ");
+            System.out.println(" ");
+            Utils.typewriterFromString( "  " + "IntelliJ IDEA ⚒️ ..." + ConsoleColors.RESET, 50);
+            System.out.println(" ");
+            System.out.println(" ");
+            Thread.sleep(2500);
+
 
         welcomeUserName();
         showProgressBar();
@@ -37,7 +58,7 @@ public class Menu {
         System.out.println("Welcome to Dungeons And Java!");
     }
 
-    public static void setGameSettings(Scanner sc) throws FileNotFoundException {
+    public static void setGameSettings(Scanner sc) throws FileNotFoundException, InterruptedException {
         registerUserName(sc);
         registerUserTeamName(sc);
         boolean continueGame;
@@ -71,18 +92,19 @@ public class Menu {
     }
 
     private static void registerUserName(Scanner sc) {
-        Utils.typewriterFromString(Messages.askUserNameMsg);
+        Utils.typewriterFromString(Messages.askUserNameMsg, 5);
         userName = sc.nextLine();
     }
 
-    private static void registerUserTeamName(Scanner sc) {
-        Utils.typewriterFromString(Messages.askTeamNameMsg(userName, ConsoleColors.GREEN_BOLD));
+    private static void registerUserTeamName(Scanner sc) throws InterruptedException {
+        Utils.typewriterFromString(Messages.askTeamNameMsg, 5);
         teamName = sc.nextLine();
-        Utils.typewriterFromString(Messages.endUserRegistrationMsg(userName, teamName, ConsoleColors.BLUE));
+        Utils.typewriterFromString(Messages.endUserRegistrationMsg,5);
+        Thread.sleep(4000);
     }
 
     private static void customCharacterCreation(Scanner sc) {
-        Utils.typewriterFromString(Messages.askCharacterCreation(ConsoleColors.YELLOW_BOLD));
+        Utils.typewriterFromString(Messages.askCharacterCreation(ConsoleColors.BLUE_BOLD_BRIGHT), 5);
         var hasCharacterSelection = sc.nextLine();
 
         if(hasCharacterSelection.equals("0")) {
@@ -93,7 +115,7 @@ public class Menu {
             CharacterToString = character.dataToString();
             userPartyService.saveCharacterToDb(CharacterToString);
 
-            Utils.typewriterFromString(Messages.askNewCharacterCreation(ConsoleColors.YELLOW_BOLD));
+            Utils.typewriterFromString(Messages.askNewCharacterCreation(ConsoleColors.BLUE_BOLD_BRIGHT), 5);
             var createNewCharacter = sc.nextLine();
             if(createNewCharacter.equals("0")) {
                 customCharacterCreation(sc);
@@ -108,7 +130,7 @@ public class Menu {
         List<Character> charactersArray = userPartyService.loadUserCharactersFromDb();
         sc.nextLine();
 
-        Utils.typewriterFromString(Messages.partyType(ConsoleColors.GREEN_BOLD));
+        Utils.typewriterFromString(Messages.partyType(ConsoleColors.BLUE_BOLD_BRIGHT), 5);
         typeOfParty = sc.nextLine();
 
         Party userParty = new Party();
@@ -125,7 +147,6 @@ public class Menu {
             case "1":
                 UserPartyService.showUserAvailableCharacters(charactersArray);
                 userParty = UserPartyService.saveCharactersToParty(charactersArray,members,sc);
-                System.out.println(userParty.toString());
                 break;
             case "2":
                 /*
@@ -145,11 +166,11 @@ public class Menu {
     }
 
     private static Party registerIAParty(Scanner sc) throws FileNotFoundException {
-        Utils.typewriterFromString(Messages.askGameDifficulty(ConsoleColors.YELLOW_BOLD));
+        Utils.typewriterFromString(Messages.askGameDifficulty(ConsoleColors.BLUE_BOLD_BRIGHT), 5);
         var difficultySelection = sc.nextInt();
 
         if(IAPartyService.getDifficulty(sc) == difficultySelection) {
-            Utils.typewriterFromString(Messages.retryRegisterGameDifficulty(ConsoleColors.RED));
+            Utils.typewriterFromString(Messages.retryRegisterGameDifficulty(ConsoleColors.RED_BOLD_BRIGHT), 5);
             registerIAParty(sc);
         }
 
@@ -160,13 +181,27 @@ public class Menu {
         return iaParty;
     }
 
-    static void startFight(Party userParty, Party iaParty) {
+    static void startFight(Party userParty, Party iaParty) throws InterruptedException {
+
+        Utils.typewriterFromString(Messages.startTheBattleMsg, 5);
+        Thread.sleep(5000);
+        Utils.typewriterFromString(Messages.battleStarts, 5);
+
+
+        Utils.progressBar(ConsoleColors.PURPLE_BOLD_BRIGHT);
+
         var combat = new ArrayList<Character>();
         do {
             combat = combatService.makeCombatBetweenRandomCharacters(userParty, iaParty);
         } while (userParty.getAliveCharacters().size() > 0 && iaParty.getAliveCharacters().size() > 0);
 
-        System.out.println("<<<<<<<<<<<<<<<<<<<<<<< Graveyard:");
-        System.out.println(combat);
+        System.out.println(" ℹ️ All dead characters of this fight are bellow ⬇️");
+        UserPartyService.showUserAvailableCharacters(combat);
+
+        try {
+            Thread.sleep(4000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

@@ -2,15 +2,20 @@ package services;
 
 import models.Character;
 import models.Party;
+import utils.ConsoleColors;
+import utils.Messages;
+import utils.Utils;
 
+import java.io.Console;
 import java.util.ArrayList;
 
 
 
 public class CombatService {
-    public static ArrayList<Character> makeCombatBetweenRandomCharacters(Party userParty, Party iaParty) {
+    public static ArrayList<Character> makeCombatBetweenRandomCharacters(Party userParty, Party iaParty) throws InterruptedException {
         Character userPartyCharacter = getRandomUserCharacter(userParty);
         Character iaRandomCharacter = getRandomIaCharacter(iaParty);
+
 
         do {
             var characterAttackDmg = userPartyCharacter.attack();
@@ -33,11 +38,26 @@ public class CombatService {
 
 
         if(userPartyCharacter.isAlive()){
-            System.out.println("User character: " + userPartyCharacter.getName() + " has won vs " + iaRandomCharacter.getName());
+            Utils.typewriterFromString(ConsoleColors.WHITE_BOLD_BRIGHT + "👤 " + userPartyCharacter.getName() + " has " +
+                                                                       "won vs " + iaRandomCharacter.getName() + " " +
+                                       "💀🤖" + ConsoleColors.RESET, 50);
+            System.out.println(" ");
         }
 
         if(iaRandomCharacter.isAlive()){
-            System.out.println("IA character: " + iaRandomCharacter.getName() + " has won vs " + userPartyCharacter.getName());
+            Utils.typewriterFromString(ConsoleColors.WHITE_BOLD_BRIGHT + "🤖 " + iaRandomCharacter.getName() + " has " +
+                                       "won vs " + userPartyCharacter.getName() + " 💀👤" + ConsoleColors.RESET, 50);
+            System.out.println(" ");
+        }
+
+        if(userPartyCharacter.isAlive()){
+            System.out.println(" ");
+            Utils.typewriterFromString(Messages.userWinCombat, 5);
+            System.out.println(" ");
+        }
+
+        if(iaRandomCharacter.isAlive()){
+            Utils.typewriterFromString(Messages.aiWinComabt, 5);
         }
 
 
@@ -56,15 +76,25 @@ public class CombatService {
             }
         }
 
+        System.out.println(" ");
+        System.out.println(" ");
+        System.out.println(" ℹ️ Graveyard status ⬇️");
         UserPartyService.showUserAvailableCharacters(listOfDeadCharacters);
 
+        Thread.sleep(5000);
+        if(userParty.getAliveCharacters().size() == 0){
+            Utils.typewriterFromString(Messages.aiWonGame, 5);
+        }
+
+        if (iaParty.getAliveCharacters().size() == 0) {
+            Utils.typewriterFromString(Messages.userWonGame,5);
+        }
+
         try {
-            Thread.sleep(2000);
+            Thread.sleep(4000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-
-
 
         return listOfDeadCharacters;
     }
