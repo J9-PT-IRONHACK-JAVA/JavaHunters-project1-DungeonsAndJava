@@ -10,7 +10,6 @@ import utils.ConsoleColors;
 import utils.Messages;
 import utils.Utils;
 
-import java.io.Console;
 import java.io.FileNotFoundException;
 import java.util.*;
 
@@ -92,14 +91,11 @@ public class UserPartyService {
         boolean continueGame = false;
         sc.nextLine();
         do {
-        System.out.println("""
-                \tCharacter type
-                [  1 --> Warrior ]
-                [  2 --> Wizard  ]
-                """);
+
+        Utils.typewriterFromString(Messages.caracterType(ConsoleColors.BLUE_BOLD_BRIGHT), 5);
 
         type = sc.nextLine();
-        System.out.println("Character name");
+        Utils.typewriterFromString(Messages.caracterName(ConsoleColors.BLUE_BOLD_BRIGHT), 5);
 
         name = sc.nextLine();
 
@@ -112,7 +108,7 @@ public class UserPartyService {
             }
         } while (!continueGame);
 
-        System.out.println("New Character has been created..."+ newCharacter.toString());
+        Utils.typewriterFromString(Messages.newCharacterCreated(newCharacter.toString(), ConsoleColors.BLUE_BOLD_BRIGHT), 5);
 
         return newCharacter;
     }

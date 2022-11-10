@@ -122,6 +122,41 @@ public class Messages {
                  """ + ConsoleColors.RESET;
     }
 
+    public static String caracterType(String color) {
+        return color + """
+
+                         |------------------------------------------|
+                         | Select your class?                       |
+                         |                                          |
+                         |   [  1 --> Warrior ]                     |
+                         |   [  2 --> Wizard  ]                     |
+                         |                                          |
+                         |------------------------------------------|
+                 
+                 """ + ConsoleColors.RESET;
+    }
+
+    public static String caracterName(String color) {
+        return color + """
+
+                         |------------------------------------------|
+                         | What is your character Name?             |
+                         |------------------------------------------|
+                 
+                 """ + ConsoleColors.RESET;
+    }
+
+    public static String newCharacterCreated(String name, String color) {
+        return color + """
+
+                         |------------------------------------------|
+                         | New Character has been created...        |
+                         | %s                                       |
+                         |------------------------------------------|
+                 
+                 """.formatted(name) + ConsoleColors.RESET;
+    }
+
     public static String askGameDifficulty(String color) {
          return color + """ 
                  
