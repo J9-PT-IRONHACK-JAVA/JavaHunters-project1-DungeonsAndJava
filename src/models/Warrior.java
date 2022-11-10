@@ -100,10 +100,9 @@ public class Warrior extends Character {
     public String toString() {
         String string;
         string = super.toString();
-        return string + "," +
-                getTypeOfCharacter() + "," +
-                "stamina=" + stamina +
-                ", strength=" + strength +
-                '}';
+        return string + ", " +
+                getTypeOfCharacter() + ", " +
+                "stamina " + stamina +
+                ", strength " + strength;
     }
 }

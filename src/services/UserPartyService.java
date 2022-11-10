@@ -108,7 +108,7 @@ public class UserPartyService {
             }
         } while (!continueGame);
 
-        Utils.typewriterFromString(Messages.newCharacterCreated(newCharacter.toString(), ConsoleColors.BLUE_BOLD_BRIGHT), 5);
+        Utils.typewriterFromString(Messages.newCharacterCreated(newCharacter.toString(), ConsoleColors.CYAN_BOLD_BRIGHT), 5);
 
         return newCharacter;
     }

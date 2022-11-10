@@ -80,7 +80,7 @@ public class Menu {
         int choose = 0;
 
         while( choose != 1 && choose != 2 ){
-            System.out.println("Not bad at all.. whould you like to repeat it \n[1--Of course]\n[2--No, that was enougth...]");
+            Utils.typewriterFromString(Messages.enGame(ConsoleColors.BLUE_BOLD_BRIGHT), 3);
             choose = sc.nextInt();
         }
 

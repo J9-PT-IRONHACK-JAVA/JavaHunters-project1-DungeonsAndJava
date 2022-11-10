@@ -98,11 +98,9 @@ public class Wizard extends Character {
     public String toString() {
         String string;
         string = super.toString();
-        return string + ","+
-
-                getTypeOfCharacter() + ","+
-                "Mana=" + mana +
-                ", Intelligence=" + intelligence +
-                '}';
+        return string + ", "+
+                getTypeOfCharacter() + ", "+
+                "Mana " + mana +
+                ", Intelligence " + intelligence;
     }
 }

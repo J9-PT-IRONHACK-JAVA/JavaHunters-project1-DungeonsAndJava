@@ -170,10 +170,10 @@ public class Messages {
     public static String newCharacterCreated(String name, String color) {
         return color + """
 
-                             |------------------------------------------|
-                             | New Character has been created...        |
-                             | %s                                       |
-                             |------------------------------------------|
+                             |------------------------------------------------------------------------------------|
+                             | New Character has been created...                                                  |
+                               %s                                                                
+                             |------------------------------------------------------------------------------------|
                  
                  """.formatted(name) + ConsoleColors.RESET;
     }
@@ -270,4 +270,18 @@ public class Messages {
                             |------------------------------------------------------------------------------------|
                         
             """ + ConsoleColors.RESET;
+
+    public static String enGame(String color) {
+        return color + """
+
+                             |--------------------------------------------------|
+                             | "Not bad at all.. whould you like to repeat it"  |
+                             |                                                  |
+                             |      [1--Of course]                              |
+                             |      [2--No, that was enougth...]                |                                             |
+                             |--------------------------------------------------|
+                 
+                 """ + ConsoleColors.RESET;
+    }
+
 }

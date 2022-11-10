@@ -77,14 +77,9 @@ public abstract class Character implements Attacker {
 
     @Override
     public String toString() {
-        return "Character{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", typeOfCharacter='" + typeOfCharacter + '\'' +
-                ", strId='" + strId + '\'' +
-                ", hp=" + hp +
-                ", isAlive=" + isAlive +
-                '}';
+        return
+                "Name '" + name + '\'' +
+                ", hp " + hp;
     }
 
     public  String dataToString(){
