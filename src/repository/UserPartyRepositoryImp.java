@@ -14,8 +14,6 @@ public class UserPartyRepositoryImp implements UserPartyRepository {
         catch(Exception e){
             System.out.println(e);
         }
-
-        System.out.println("Success...");
     }
 
     @Override

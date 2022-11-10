@@ -84,7 +84,7 @@ public class Messages {
         return color + """
                  
                             |----------------------------------------------------------------------------|
-                            | %s                                                                         |
+                              %s                                                                         
                             |----------------------------------------------------------------------------|
                     
                 """.formatted(message) + ConsoleColors.RESET;
@@ -238,7 +238,7 @@ public class Messages {
     public static String aiWinComabt = ConsoleColors.BLUE_BOLD_BRIGHT + """
                         
                         |------------------------------------------------------------------------------------|
-                        |          AI has win this combat! You need to do better job mate... 😈😈            |
+                        |        😈😈 AI has win this combat! You need to do better job mate... 😈😈        |
                         |------------------------------------------------------------------------------------|
                         
             """ + ConsoleColors.RESET;
@@ -246,7 +246,7 @@ public class Messages {
     public static String userWinCombat = ConsoleColors.BLUE_BOLD_BRIGHT + """
                         
                         |------------------------------------------------------------------------------------|
-                        |                        You win this combat! Good job... 🙄🙄                       |
+                        |                      🙄🙄 You win this combat! Good job... 🙄🙄                   |
                         |------------------------------------------------------------------------------------|
                         
             """ + ConsoleColors.RESET;
