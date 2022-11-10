@@ -26,6 +26,7 @@ public class UserPartyService {
         int amountOfMembers;
         Utils.typewriterFromString(Messages.partyMembers(ConsoleColors.BLUE_BOLD_BRIGHT), 5);
         amountOfMembers = sc.nextInt();
+
         return amountOfMembers;
     }
 
@@ -88,6 +89,7 @@ public class UserPartyService {
     public static Character createNewCharacter(Scanner sc) {
         String name, type;
         Character newCharacter = null;
+        sc.nextLine();
         System.out.println("""
                 \tCharacter type
                 [  1 --> Warrior ]

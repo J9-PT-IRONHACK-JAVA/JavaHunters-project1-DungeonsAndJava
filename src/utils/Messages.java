@@ -70,6 +70,28 @@ public class Messages {
                 """ + ConsoleColors.RESET;
     }
 
+    public static String unrecognisedSelection(String color) {
+        return color + """
+                 
+                            |----------------------------------------------------------------------------|
+                            | Selection unrecognised. Remember mortal, select from 1 to 2!               |
+                            |----------------------------------------------------------------------------|
+                    
+                """ + ConsoleColors.RESET;
+    }
+
+    public static String noAvailableCharacters(int number, String color) {
+        return color + """
+                 
+                            |----------------------------------------------------------------------------|
+                            | Hey BRO!!!,                                                                |
+                            | Keep on dreaming!! You don't have sufficient available characters          |
+                            | Select less than %s characters                                             |
+                            |----------------------------------------------------------------------------|
+                    
+                """.formatted(number) + ConsoleColors.RESET;
+    }
+
     public static String askCharacterCreation(String color) {
         return color + """
                  

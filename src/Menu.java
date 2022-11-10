@@ -25,7 +25,7 @@ public class Menu {
     public static void startGame() throws IOException, InterruptedException, LineUnavailableException {
         var sc = new Scanner(System.in);
 
-            Utils.makeSound("./assets/backgroundMusic.wav");
+            /*Utils.makeSound("./assets/backgroundMusic.wav");
             Thread.sleep(4000);
             System.out.println(" ");
             System.out.println(" ");
@@ -44,7 +44,7 @@ public class Menu {
 
 
         welcomeUserName();
-        showProgressBar();
+        showProgressBar();*/
         setGameSettings(sc);
 
         sc.close();
@@ -72,14 +72,14 @@ public class Menu {
 
         } while ( continueGame );
 
-        //final function with the credits
+        // TODO: final function with the credits
     }
 
     public static boolean repeatGame(Scanner sc){
         boolean continuee = false;
         int choise = 0;
 
-        while( choise !=1 && choise!=2 ){
+        while( choise != 1 && choise != 2 ){
             System.out.println("Not bad at all.. whould you like to repeat it \n [1--Of course]\n[2--No, that was enougth...]");
             choise = sc.nextInt();
         }
@@ -101,23 +101,40 @@ public class Menu {
     }
 
     private static void customCharacterCreation(Scanner sc) {
-        Utils.typewriterFromString(Messages.askCharacterCreation(ConsoleColors.BLUE_BOLD_BRIGHT), 5);
-        var hasCharacterSelection = sc.nextLine();
+        boolean continueGame = false;
+        int hasCharacterSelection = 0;
 
-        if(hasCharacterSelection.equals("0")) {
-            Character character;
-            String CharacterToString;
+        do {
+            Utils.typewriterFromString(Messages.askCharacterCreation(ConsoleColors.BLUE_BOLD_BRIGHT), 5);
+            hasCharacterSelection = sc.nextInt();
+            if(hasCharacterSelection == 0 || hasCharacterSelection == 1) {
+                continueGame = true;
 
-            character = userPartyService.createNewCharacter(sc);
-            CharacterToString = character.dataToString();
-            userPartyService.saveCharacterToDb(CharacterToString);
+                if(hasCharacterSelection == 0) {
+                    Character character;
+                    String CharacterToString;
 
-            Utils.typewriterFromString(Messages.askNewCharacterCreation(ConsoleColors.BLUE_BOLD_BRIGHT), 5);
-            var createNewCharacter = sc.nextLine();
-            if(createNewCharacter.equals("0")) {
-                customCharacterCreation(sc);
+                    character = userPartyService.createNewCharacter(sc);
+                    CharacterToString = character.dataToString();
+                    userPartyService.saveCharacterToDb(CharacterToString);
+
+                    boolean continueCreatingCharacters = true;
+                    do {
+                        Utils.typewriterFromString(Messages.askNewCharacterCreation(ConsoleColors.BLUE_BOLD_BRIGHT), 5);
+                        var createNewCharacter = sc.nextInt();
+
+                        if(createNewCharacter == 0) {
+                            character = userPartyService.createNewCharacter(sc);
+                            CharacterToString = character.dataToString();
+                            userPartyService.saveCharacterToDb(CharacterToString);
+                        } else if(createNewCharacter == 1)  {
+                            continueCreatingCharacters = false;
+                        }
+
+                    }while (continueCreatingCharacters);
+                }
             }
-        }
+        } while (!continueGame);
     }
 
     public static Party registerUserParty(Scanner sc) throws FileNotFoundException {
@@ -125,37 +142,31 @@ public class Menu {
         String typeOfParty;
         members = UserPartyService.selectAmountOfMembers(sc);
         List<Character> charactersArray = userPartyService.loadUserCharactersFromDb();
-        sc.nextLine();
 
+        if(members > charactersArray.size()) {
+            Utils.typewriterFromString(Messages.noAvailableCharacters(charactersArray.size(), ConsoleColors.RED_BOLD_BRIGHT), 5);
+            registerUserParty(sc);
+        }
+
+        // si el amountOfMembers es > al numero de miembros que hay en la base de datos del usuario
+        // que ponga un numero mas bajo del que hay sino que hubiese creado mas
+
+        sc.nextLine();
         Utils.typewriterFromString(Messages.partyType(ConsoleColors.BLUE_BOLD_BRIGHT), 5);
         typeOfParty = sc.nextLine();
 
         Party userParty = new Party();
-
-        switch ( typeOfParty ) {
-            /*case "1":
-                Character character;
-                String CharacterToString;
-
-                character = UserPartyService.createNewCharacter(sc);
-                CharacterToString = character.dataToString();
-                userPartyService.saveCharacterToDb(CharacterToString);
-                break;*/
+        switch (typeOfParty) {
             case "1":
                 UserPartyService.showUserAvailableCharacters(charactersArray);
                 userParty = UserPartyService.saveCharactersToParty(charactersArray,members,sc);
                 break;
             case "2":
-                /*
-                boolean sameRange, correctRange;
-                sameRange = UserPartyService.partySameRandomRange(members ,charactersArray);
-                correctRange = UserPartyService.partySameRandomRange(members ,charactersArray);
-                */
-
                 userParty = UserPartyService.saveRandomParty(true, true, members, charactersArray);
                 break;
             default:
-                System.out.println("Selection unrecognised. Remember mortal, select from 1 to 3!");
+                Utils.typewriterFromString(Messages.unrecognisedSelection(ConsoleColors.RED_BOLD_BRIGHT), 5);
+                registerUserParty(sc);
         }
 
         localUserParty = userParty;
