@@ -80,6 +80,16 @@ public class Messages {
                 """ + ConsoleColors.RESET;
     }
 
+    public static String printSelectedDifficulty(String message, String color) {
+        return color + """
+                 
+                            |----------------------------------------------------------------------------|
+                            | %s                                                                         |
+                            |----------------------------------------------------------------------------|
+                    
+                """.formatted(message) + ConsoleColors.RESET;
+    }
+
     public static String noAvailableCharacters(int number, String color) {
         return color + """
                  
@@ -145,6 +155,17 @@ public class Messages {
                  
                  """ + ConsoleColors.RESET;
     }
+
+    public static String badSelection(String color) {
+        return color + """
+
+                         |------------------------------------------------|
+                         | HAHAHA NO!. Select correct character number    |
+                         |------------------------------------------------|
+                 
+                 """ + ConsoleColors.RESET;
+    }
+
 
     public static String newCharacterCreated(String name, String color) {
         return color + """

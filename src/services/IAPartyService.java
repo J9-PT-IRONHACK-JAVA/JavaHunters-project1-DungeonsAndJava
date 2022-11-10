@@ -3,6 +3,9 @@ package services;
 import models.Character;
 import models.Party;
 import repository.IAPartyRepositoryImp;
+import utils.ConsoleColors;
+import utils.Messages;
+import utils.Utils;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -16,25 +19,24 @@ public class IAPartyService {
         difficultyRepository = new IAPartyRepositoryImp();
     }
 
-    public static int getDifficulty(Scanner sc) {
+    public static int getDifficulty(Scanner sc, int difficultySelection) {
         boolean toExit = true;
         int difficulty = -1;
         while (toExit) {
-            String input = sc.nextLine();
 
-            switch (input) {
-                case "0":
-                    System.out.println("You selected: A Walk In The Park");
+            switch (difficultySelection) {
+                case 0:
+                    Utils.typewriterFromString(Messages.printSelectedDifficulty("You selected: A Walk In The Park", ConsoleColors.BLUE_BOLD_BRIGHT), 5);
                     toExit = false;
                     difficulty = 0;
                     break;
-                case "1":
-                    System.out.println("You selected: Middle Of The Road");
+                case 1:
+                    Utils.typewriterFromString(Messages.printSelectedDifficulty("You selected: Middle Of The Road", ConsoleColors.BLUE_BOLD_BRIGHT), 5);
                     toExit = false;
                     difficulty = 1;
                     break;
-                case "2":
-                    System.out.println("You selected: Nightmare!");
+                case 2:
+                    Utils.typewriterFromString(Messages.printSelectedDifficulty("You selected: Nightmare!", ConsoleColors.BLUE_BOLD_BRIGHT), 5);
                     toExit = false;
                     difficulty = 2;
                     break;

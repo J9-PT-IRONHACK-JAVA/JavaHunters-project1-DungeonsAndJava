@@ -211,7 +211,7 @@ public class UserPartyService {
             Utils.typewriterFromString(Messages.enterCharacterNumber, 5);
             choice = sc.nextInt();
             if(choice < 1 || choice > limit){
-                System.out.println("Bad selection");
+                Utils.typewriterFromString(Messages.badSelection(ConsoleColors.RED_BOLD_BRIGHT), 5);
             }else{
 
                 selectedCharacter = dbCharacters.get(choice-1);

@@ -178,15 +178,22 @@ public class Menu {
     }
 
     private static Party registerIAParty(Scanner sc) throws FileNotFoundException {
-        Utils.typewriterFromString(Messages.askGameDifficulty(ConsoleColors.BLUE_BOLD_BRIGHT), 5);
-        var difficultySelection = sc.nextInt();
+        boolean continueGame = false;
+        int difficultySelection;
 
-        if(IAPartyService.getDifficulty(sc) == difficultySelection) {
-            Utils.typewriterFromString(Messages.retryRegisterGameDifficulty(ConsoleColors.RED_BOLD_BRIGHT), 5);
-            registerIAParty(sc);
+        do {
+            Utils.typewriterFromString(Messages.askGameDifficulty(ConsoleColors.BLUE_BOLD_BRIGHT), 5);
+            difficultySelection = sc.nextInt();
+
+            if(IAPartyService.getDifficulty(sc, difficultySelection) == 3) {
+                Utils.typewriterFromString(Messages.retryRegisterGameDifficulty(ConsoleColors.RED_BOLD_BRIGHT), 5);
+            } else {
+                continueGame = true;
+            }
         }
+        while (!continueGame);
 
-        var charactersArray = IAPartyService.getIaPartyByDifficulty(difficulty);
+        var charactersArray = IAPartyService.getIaPartyByDifficulty(difficultySelection);
         var userPartySize = localUserParty.getCharacters().size();
         Party iaParty = UserPartyService.saveRandomParty(true, true, userPartySize, charactersArray);
 
