@@ -205,7 +205,6 @@ public class UserPartyService {
         while( tempList.size() != amountOfPartyMembers  ){
             exist = false;
             Utils.typewriterFromString(Messages.enterCharacterNumber, 5);
-            System.out.println("Enter the character number");
             choice = sc.nextInt();
             if(choice < 1 || choice > limit){
                 System.out.println("Bad selection");
