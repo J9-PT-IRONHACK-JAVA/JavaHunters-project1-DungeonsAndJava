@@ -2,6 +2,16 @@ package utils;
 
 public class Messages {
 
+    public static String ShowLogo = ConsoleColors.RED + """
+                                                    (       (                                     \s
+               (      )   )      )       )          )\\ )    )\\ )  (       )  (  (                 \s
+               )\\  ( /(  /((  ( /(    ( /(   (     (()/(   (()/(  )(   ( /(  )\\))(  (    (     (  \s
+              ((_) )(_))(_))\\ )(_))   )(_))  )\\ )   ((_))   ((_))(()\\  )(_))((_))\\  )\\   )\\ )  )\\ \s
+             _ | |((_)_ _)((_)(_)_   ((_)_  _(_/(   _| |    _| |  ((_)((_)_  (()(_)((_) _(_/( ((_)\s
+            | || |/ _` |\\ V // _` |  / _` || ' \\))/ _` |  / _` | | '_|/ _` |/ _` |/ _ \\| ' \\))(_-<\s
+             \\__/ \\__,_| \\_/ \\__,_|  \\__,_||_||_| \\__,_|  \\__,_| |_|  \\__,_|\\__, |\\___/|_||_| /__/\s
+                                                                            |___/                 \s
+            """ + ConsoleColors.RESET;
     public static String askUserNameMsg = ConsoleColors.BLUE_BOLD_BRIGHT + """
                         
                         |-------------------------------------------------------|
@@ -25,11 +35,11 @@ public class Messages {
 
     public static String endUserRegistrationMsg = ConsoleColors.BLUE_BOLD_BRIGHT + """
   
-                            |------------------------------------------------------|
-                            | Well well well...                                    |
-                            | I hope you are convinced of these names and          |
-                            | that you are ready for the adventure that awaits you!|
-                            |______________________________________________________|
+                            |-------------------------------------------------------|
+                            | Well well well...                                     |
+                            | I hope you are convinced of these names and           |
+                            | that you are ready for the adventure that awaits you! |
+                            |_______________________________________________________|
                         
                 """ + ConsoleColors.RESET;
 

@@ -55,7 +55,7 @@ public class Menu {
     }
 
     public static void welcomeUserName() {
-        System.out.println("Welcome to Dungeons And Java!");
+        System.out.println(Messages.ShowLogo);
     }
 
     public static void setGameSettings(Scanner sc) throws FileNotFoundException, InterruptedException {
@@ -68,7 +68,6 @@ public class Menu {
             var userParty = registerUserParty(sc);
             var iaParty = registerIAParty(sc);
             startFight(userParty, iaParty);
-            sc.nextLine();
             continueGame = repeatGame(sc);
 
         } while ( continueGame );
@@ -80,14 +79,12 @@ public class Menu {
         boolean continuee = false;
         int choise = 0;
 
-
         while( choise !=1 && choise!=2 ){
             System.out.println("Not bad at all.. whould you like to repeat it \n [1--Of course]\n[2--No, that was enougth...]");
             choise = sc.nextInt();
         }
 
         if(choise == 1) continuee = true;
-
         return continuee;
     }
 
