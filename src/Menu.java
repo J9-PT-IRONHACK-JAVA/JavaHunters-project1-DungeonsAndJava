@@ -25,7 +25,7 @@ public class Menu {
     public static void startGame() throws IOException, InterruptedException, LineUnavailableException {
         var sc = new Scanner(System.in);
 
-            Utils.makeSound("./assets/backgroundMusic.wav");
+            /*Utils.makeSound("./assets/backgroundMusic.wav");
             Thread.sleep(4000);
             System.out.println(" ");
             System.out.println(" ");
@@ -44,7 +44,7 @@ public class Menu {
 
 
         welcomeUserName();
-        showProgressBar();
+        showProgressBar();*/
         setGameSettings(sc);
 
         sc.close();
@@ -76,16 +76,16 @@ public class Menu {
     }
 
     public static boolean repeatGame(Scanner sc){
-        boolean continuee = false;
-        int choise = 0;
+        boolean continueGame = false;
+        int choose = 0;
 
-        while( choise != 1 && choise != 2 ){
-            System.out.println("Not bad at all.. whould you like to repeat it \n [1--Of course]\n[2--No, that was enougth...]");
-            choise = sc.nextInt();
+        while( choose != 1 && choose != 2 ){
+            System.out.println("Not bad at all.. whould you like to repeat it \n[1--Of course]\n[2--No, that was enougth...]");
+            choose = sc.nextInt();
         }
 
-        if(choise == 1) continuee = true;
-        return continuee;
+        if(choose == 1) continueGame = true;
+        return continueGame;
     }
 
     private static void registerUserName(Scanner sc) {
@@ -138,30 +138,34 @@ public class Menu {
     }
 
     public static Party registerUserParty(Scanner sc) throws FileNotFoundException {
-        int members;
-        String typeOfParty;
-        members = UserPartyService.selectAmountOfMembers(sc);
+        int members = 0;
+        int typeOfParty;
         List<Character> charactersArray = userPartyService.loadUserCharactersFromDb();
+        boolean continueGame = true;
 
-        if(members > charactersArray.size()) {
-            Utils.typewriterFromString(Messages.noAvailableCharacters(charactersArray.size(), ConsoleColors.RED_BOLD_BRIGHT), 5);
-            registerUserParty(sc);
-        }
+        do{
+            members = UserPartyService.selectAmountOfMembers(sc);
 
-        // si el amountOfMembers es > al numero de miembros que hay en la base de datos del usuario
-        // que ponga un numero mas bajo del que hay sino que hubiese creado mas
+            if(members > charactersArray.size()) {
+                Utils.typewriterFromString(Messages.noAvailableCharacters(charactersArray.size(), ConsoleColors.RED_BOLD_BRIGHT), 5);
+                continueGame = false;
+            } else {
+                continueGame = true;
+            }
 
-        sc.nextLine();
+        }while (!continueGame);
+
+
         Utils.typewriterFromString(Messages.partyType(ConsoleColors.BLUE_BOLD_BRIGHT), 5);
-        typeOfParty = sc.nextLine();
+        typeOfParty = sc.nextInt();
 
         Party userParty = new Party();
         switch (typeOfParty) {
-            case "1":
+            case 1:
                 UserPartyService.showUserAvailableCharacters(charactersArray);
                 userParty = UserPartyService.saveCharactersToParty(charactersArray,members,sc);
                 break;
-            case "2":
+            case 2:
                 userParty = UserPartyService.saveRandomParty(true, true, members, charactersArray);
                 break;
             default:

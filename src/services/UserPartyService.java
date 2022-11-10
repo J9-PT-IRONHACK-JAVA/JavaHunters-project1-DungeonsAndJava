@@ -89,25 +89,31 @@ public class UserPartyService {
     public static Character createNewCharacter(Scanner sc) {
         String name, type;
         Character newCharacter = null;
+        boolean continueGame = false;
         sc.nextLine();
+        do {
         System.out.println("""
                 \tCharacter type
                 [  1 --> Warrior ]
                 [  2 --> Wizard  ]
                 """);
-        type = sc.nextLine();
 
+        type = sc.nextLine();
         System.out.println("Character name");
 
         name = sc.nextLine();
 
-        if(type.equals("1")) {
-            newCharacter = new Warrior(name);
-        } else if (type.equals("2")) {
-            newCharacter = new Wizard(name);
-        }
+            if(type.equals("1")) {
+                newCharacter = new Warrior(name);
+                continueGame = true;
+            } else if (type.equals("2")) {
+                newCharacter = new Wizard(name);
+                continueGame = true;
+            }
+        } while (!continueGame);
 
-        System.out.println("New Character has been created..."+newCharacter.toString());
+        System.out.println("New Character has been created..."+ newCharacter.toString());
+
         return newCharacter;
     }
 
