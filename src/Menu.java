@@ -15,6 +15,7 @@ import static java.lang.Integer.parseInt;
 public class Menu {
     static String userName;
     static String teamName;
+
     static int difficulty;
     private static final IAPartyService IAPartyService = new IAPartyService();
     private static final UserPartyService userPartyService = new UserPartyService();
